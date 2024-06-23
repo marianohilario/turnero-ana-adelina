@@ -28,7 +28,7 @@ function controlStock(talle) {
         return 'Sin Stock';
     return 'En stock';
 }
-let talle = 'L';
+let talle = 'XL';
 console.log(`${controlStock(talle)} para el talle seleccionado (${talle})`);
 talle = 'XL';
 console.log(`${controlStock(talle)} para el talle seleccionado (${talle})`);
