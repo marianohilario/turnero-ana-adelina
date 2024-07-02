@@ -1,12 +1,12 @@
 import { Request, Response } from "express";
 
-export const getAppointments = (req: Request, res: Response) => {
+export const getAllAppointments = (req: Request, res: Response) => {
     res.status(200).json({
         message:
             "Devuelve el listado de todos los turnos de todos los usuarios",
     });
 };
-export const getAppointment = (req: Request, res: Response) => {
+export const getAppointmentById = (req: Request, res: Response) => {
     res.status(200).json({
         message: "Devuelve el detalle de un turno específico",
     });
