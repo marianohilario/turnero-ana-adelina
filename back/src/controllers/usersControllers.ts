@@ -19,13 +19,11 @@ export const getUser = catchAsync(async (req: Request, res: Response) => {
 });
 
 export const createUser = catchAsync(async (req: Request, res: Response) => {
-    const userData = req.body;
-    const newUser = await createNewUser(userData);
+    const newUser = await createNewUser(req.body);
     res.status(200).json(newUser);
 });
 
 export const loginUser = catchAsync(async (req: Request, res: Response) => {
-    const userCredentials = req.body;
-    const successLog = await logUser(userCredentials);
+    const successLog = await logUser(req.body);
     res.status(200).json(successLog);
 });

@@ -1,6 +1,11 @@
-interface IDtoCredential {
+export interface IDtoCredential {
+    id: number;
     username: string;
     password: string;
 }
 
-export default IDtoCredential;
+export interface IDtoLogin {
+    username: string;
+    password: string;
+}
+

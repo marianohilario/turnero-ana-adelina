@@ -24,8 +24,7 @@ export const getAppointment = catchAsync(
 
 export const scheduleAppointment = catchAsync(
     async (req: Request, res: Response) => {
-        const appointmentData = req.body;
-        const newAppointment = await createAppointment(appointmentData);
+        const newAppointment = await createAppointment(req.body);
         res.status(200).json(newAppointment);
     }
 );
