@@ -1,48 +1,49 @@
 import IDtoAppointment from "../dto/appointmentDTO";
 import AuxError from "../utils/AuxiliarError";
 import { Appointment } from "../entities/Appointment";
-import { AppointmentModel, UserModel } from "../config/data-source";
+import { AppointmentRepository } from "../repositories/AppointmentRepository";
+import { UserRepository } from "../repositories/UserRepository";
 
 export const getAllAppointments = async (): Promise<Appointment[]> => {
-    const allAppointments = await AppointmentModel.find({
+    const allAppointments = await AppointmentRepository.find({
         relations: {
             user: true,
         },
     });
-    return allAppointments;
+    if (allAppointments.length !== 0 ) return allAppointments;
+    throw new AuxError('No appointments to show', 404)
 };
 
 export const getAppointmentById = async (id: number): Promise<Appointment> => {
-    const searchedAppointment = await AppointmentModel.findOne({
+    const searchedAppointment = await AppointmentRepository.findOne({
         where: { id },
         relations: {
             user: true,
         },
     });
     if (!searchedAppointment)
-        throw new AuxError("Appointment id does not exist", 400);
+        throw new AuxError("Appointment id does not exist", 404);
     return searchedAppointment;
 };
 
 export const createAppointment = async (
     appointmentData: IDtoAppointment
 ): Promise<Appointment> => {
-    const newAppointment = await AppointmentModel.create(appointmentData);
-    await AppointmentModel.save(newAppointment);
-    const user = await UserModel.findOneBy({ id: appointmentData.UserId });
-    if (!user) throw new AuxError("Inexistent user", 404);
+    const user = await UserRepository.findById(appointmentData.UserId);
+    const newAppointment = await AppointmentRepository.create(appointmentData);
+    await AppointmentRepository.save(newAppointment);
     newAppointment.user = user;
-    await AppointmentModel.save(newAppointment);
+    await AppointmentRepository.save(newAppointment);
 
     return newAppointment;
 };
 
 export const cancelAppointmentById = async (id: number) => {
-    const updateAppointment = await AppointmentModel.findOneBy({ id });
+    const updateAppointment = await AppointmentRepository.findOneBy({ id });
     if (!updateAppointment)
-        throw new AuxError("Appointment id does not exist", 400);
+        throw new AuxError("Appointment id does not exist", 404);
     updateAppointment.status = "cancelled";
-    await AppointmentModel.save(updateAppointment);
+    await AppointmentRepository.save(updateAppointment);
 
     return updateAppointment;
 };
