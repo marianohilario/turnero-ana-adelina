@@ -1,0 +1,64 @@
+.social {
+    color: white;
+    position: absolute;
+    bottom: 10%;
+    right: 4rem;
+    display: flex;
+    gap: 2rem;
+    z-index: 1;
+}
+
+.social a svg {
+    fill: white;
+    height: 24px;
+    width: 24px;
+    transition: transform 0.3s ease;
+}
+.social a {
+    position: relative;
+    transition: transform 1s ease;
+}
+
+.social a::before {
+    content: "";
+    width: 100%;
+    height: 2px;
+    border-radius: 50%;
+    background-color: rgba(0, 0, 0, 0.2);
+    box-shadow: 0 0 5px rgba(0, 0, 0, 0.7);
+    position: absolute;
+    top: 100%;
+    left: 0;
+    opacity: 0;
+    transform: scale(0);
+    transition: transform 0.3s ease;
+}
+
+.social a:hover::before {
+    opacity: 1;
+    transform: scale(1);
+}
+
+.social a:hover svg {
+    animation: socialAnimation 1s infinite;
+}
+
+@keyframes socialAnimation {
+    0% {
+        transform: scale(1); /* Tamaño inicial */
+    }
+    50% {
+        transform: scale(1.1); /* Tamaño aumentado */
+    }
+    100% {
+        transform: scale(1); /* Regresar al tamaño inicial */
+    }
+}
+
+@media (max-width: 900px) {
+    .social {
+        bottom: 5%;
+        right: 50%;
+        transform: translateX(50%);
+    }
+}

@@ -1,0 +1,147 @@
+.homeContainer {
+    position: relative;
+    /* top: 0; */
+    width: 100%;
+    height: 100%;
+    /* box-shadow: 0 0 90px rgba(0, 0, 0, 0.6); */
+}
+
+.homeContainer::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100.1%;
+    background: url(home.png) no-repeat right/contain,
+        linear-gradient(-90deg, #e25c7f 0%, #e25c7f 40%, #ff92b4 100%);
+    transform: scaleX(-1);
+}
+
+.homeInfo {
+    position: absolute;
+    inset: 0 0 0 0;
+    top: 25%;
+    right: 5rem;
+    text-align: end;
+    z-index: 1;
+}
+
+.homeInfo h2 {
+    margin-top: 1rem;
+}
+
+.appointmentBtn {
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    font-weight: 900;
+    color: #e25c7f;
+    background-color: #fff;
+    border-radius: 25px;
+    padding: 0.8rem 1.5rem;
+    display: inline-block;
+    margin-top: 1rem;
+    cursor: pointer;
+    transition: border-color 0.25s;
+    position: relative;
+    overflow: hidden;
+}
+
+.appointmentBtn span {
+    position: relative;
+    z-index: 1;
+    transition: all 0.475s;
+}
+
+.appointmentBtn::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    transform: scaleX(0);
+    transform-origin: 0 50%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(82.3deg, #e25c7f 40%, #ff92b4 94%);
+    transition: all 0.475s;
+}
+
+.appointmentBtn:hover {
+    box-shadow: 0 0 10px rgba(255, 255, 255, 1);
+}
+.appointmentBtn:hover::before {
+    transform: scaleX(1);
+}
+.appointmentBtn:hover span {
+    color: #fff;
+}
+
+@media (max-width: 1080px) {
+    .homeContainer::before {
+        content: "";
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: url(home.png) no-repeat right/cover,
+            linear-gradient(-90deg, #e25c7f 0%, #e25c7f 40%, #ff92b4 100%);
+        background-position: 100% 100%;
+        transform: scaleX(-1);
+    }
+}
+
+@media (max-width: 900px) {
+    .homeContainer::after {
+        content: "";
+        position: absolute;
+        background-color: rgba(0, 0, 0, 0.3);
+        inset: 0 0 0 0;
+    }
+
+    .homeInfo {
+        top: max(15%, 130px);
+        right: 0;
+        padding-right: 5%;
+    }
+
+    .appointmentBtn {
+        margin-top: 3rem;
+    }
+}
+
+@media (max-width: 768px) {
+    .homeInfo {
+        top: max(15%, 130px);
+        right: 0;
+        padding-right: 5%;
+    }
+
+    .homeInfo img {
+        width: 80%;
+        filter: drop-shadow(0 0 1px rgb(0, 0, 0));
+        filter: drop-shadow(0 0 10px rgb(255, 255, 255));
+    }
+
+    .homeInfo h2 {
+        margin-top: 0rem;
+        font-size: 1.5em;
+    }
+
+    @media (max-width: 650px) {
+        .homeInfo img {
+            width: 95%;
+        }
+
+        .homeInfo h2 {
+            margin-top: 0rem;
+            font-size: 1.25em;
+        }
+
+        .appointmentBtn {
+            position: absolute;
+            left: 2rem;
+            bottom: 9rem;
+        }
+    }
+}

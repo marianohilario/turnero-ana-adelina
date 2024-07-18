@@ -1,0 +1,107 @@
+.appointmentsContainer {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.appointmentsHeader {
+    width: 80%;
+    display: flex;
+    justify-content: space-between;
+    margin-top: 130px;
+    margin-bottom: 2rem;
+}
+.appointmentsTitle {
+    display: flex;
+    align-items: center;
+}
+
+.appointmentsTitle img {
+    height: 40px;
+    margin-right: 0.5rem;
+}
+.appointmentsTitle h1 {
+    font-size: 44px;
+}
+
+.appointmentBtn {
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    font-weight: 900;
+    color: #e25c7f;
+    background-color: #fff;
+    border-radius: 25px;
+    padding: 0.8rem 1.5rem;
+    display: inline-block;
+    margin-top: 1rem;
+    cursor: pointer;
+    transition: border-color 0.25s;
+    position: relative;
+    overflow: hidden;
+}
+
+.appointmentBtn span {
+    position: relative;
+    z-index: 1;
+    transition: all 0.475s;
+}
+
+.appointmentBtn::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    transform: scaleX(0);
+    transform-origin: 0 50%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(82.3deg, #e25c7f 40%, #ff92b4 94%);
+    transition: all 0.475s;
+}
+
+.appointmentBtn:hover {
+    box-shadow: 0 0 10px rgba(255, 255, 255, 1);
+}
+.appointmentBtn:hover::before {
+    transform: scaleX(1);
+}
+.appointmentBtn:hover span {
+    color: #fff;
+}
+
+.appointmentsTableContainer {
+    width: 80%;
+    max-height: 60vh;
+    color: #333;
+    overflow-y: auto;
+}
+
+.appointmentsTable {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+.appointmentsTable thead {
+    background-color: rgb(176, 167, 167);
+    height: 3rem;
+    color: #fff;
+    position: sticky;
+    top: 0;
+    z-index: 1;
+}
+
+.appointmentsTable tbody {
+    background-color: #fff;
+}
+
+.appointmentsTable tbody tr {
+    height: 3rem;
+    border: 1px solid #ccc;
+}
+
+.appointmentsTable tbody tr td:last-child {
+    width: 160px;
+}

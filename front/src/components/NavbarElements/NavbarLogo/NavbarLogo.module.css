@@ -1,0 +1,13 @@
+.navbarLogo {
+    margin-left: 4rem;
+}
+
+.navbarLogo img {
+    height: 80px;
+}
+
+@media (max-width: 767px) {
+    .navbarLogo {
+        margin-left: 1rem;
+    }
+}

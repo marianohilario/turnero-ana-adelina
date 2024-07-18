@@ -1,0 +1,62 @@
+.cancelBtn {
+    width: 150px;
+    height: 2rem;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    border: none;
+    border-radius: 5px;
+    font-size: 1rem;
+    box-shadow: 1px 1px 3px rgba(0, 0, 0, 0.15);
+    background: #e62222;
+    position: relative;
+}
+
+.cancelBtn,
+.cancelBtn span {
+    transition: 200ms;
+}
+
+.cancelBtn span:first-child {
+    transform: translateX(35px);
+    color: white;
+    font-weight: bold;
+}
+
+.cancelBtn span:last-child {
+    position: absolute;
+    border-left: 1px solid #c41b1b;
+    transform: translateX(110px);
+    height: 100%;
+    width: 40px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.cancelBtn svg {
+    width: 15px;
+    fill: #eee;
+}
+
+.cancelBtn:hover {
+    background: #ff3636;
+}
+
+.cancelBtn:hover span:first-child {
+    color: transparent;
+}
+
+.cancelBtn:hover span:last-child {
+    width: 150px;
+    border-left: none;
+    transform: translateX(0);
+}
+
+.cancelBtn:focus {
+    outline: none;
+}
+
+.cancelBtn:active span:last-child svg {
+    transform: scale(0.8);
+}

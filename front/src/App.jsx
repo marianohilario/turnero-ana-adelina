@@ -1,16 +1,15 @@
-import { useState } from "react";
 import "./App.css";
 import Home from "./views/Home/Home";
+import Navbar from "./components/Navbar/Navbar";
+import Appointments from "./views/Appointments/Appointments";
 
 function App() {
-    const [count, setCount] = useState(0);
-
     return (
-        <>
-            <div className="home-container">
-                <Home />
-            </div>
-        </>
+        <main className="mainContainer">
+            <Navbar />
+            {/* <Home /> */}
+            <Appointments />
+        </main>
     );
 }
 

@@ -1,8 +1,8 @@
-import "./NavbarLogo.css";
+import styles from "./NavbarLogo.module.css";
 const NavbarLogo = () => {
     return (
         <>
-            <div className="navbarLogo">
+            <div className={styles.navbarLogo}>
                 <img src="./LogoAnaAdelina-removebg-preview (1).png" alt="" />
             </div>
         </>
