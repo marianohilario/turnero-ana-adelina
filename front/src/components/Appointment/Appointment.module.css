@@ -10,6 +10,7 @@
     box-shadow: 1px 1px 3px rgba(0, 0, 0, 0.15);
     background: #e62222;
     position: relative;
+    margin-inline: auto;
 }
 
 .cancelBtn,
@@ -39,15 +40,15 @@
     fill: #eee;
 }
 
-.cancelBtn:hover {
+.cancelBtn:not(:disabled):hover {
     background: #ff3636;
 }
 
-.cancelBtn:hover span:first-child {
+.cancelBtn:not(:disabled):hover span:first-child {
     color: transparent;
 }
 
-.cancelBtn:hover span:last-child {
+.cancelBtn:not(:disabled):hover span:last-child {
     width: 150px;
     border-left: none;
     transform: translateX(0);
@@ -59,4 +60,96 @@
 
 .cancelBtn:active span:last-child svg {
     transform: scale(0.8);
+}
+
+.cancelBtn:disabled {
+    opacity: 0.6;
+    cursor: not-allowed;
+}
+
+.cancelledStatus {
+    background-color: red;
+    color: #fff;
+    display: inline-block;
+    width: 100px;
+    border-radius: 1rem;
+}
+
+.activeStatus {
+    background-color: green;
+    color: #fff;
+    display: inline-block;
+    width: 100px;
+    border-radius: 1rem;
+}
+
+@media (max-width: 1024px) {
+    .cancelBtn span:last-child {
+        opacity: 0;
+        visibility: hidden;
+        transform: translateX(90px);
+    }
+    .cancelBtn {
+        width: 90px;
+    }
+    .cancelBtn span:first-child {
+        transform: translateX(0);
+        margin-inline: auto;
+    }
+    .cancelBtn:not(:disabled):hover span:last-child {
+        opacity: 1;
+        visibility: visible;
+        width: 90px;
+        border-left: none;
+        transform: translateX(0);
+    }
+}
+
+@media (max-width: 800px) {
+    .cancelledStatus {
+        color: red;
+        width: 1rem;
+        height: 1rem;
+        overflow: hidden;
+        position: relative;
+    }
+
+    .cancelledStatus::before {
+        content: url("./close.svg");
+        position: absolute;
+        inset: 0 0 0 0;
+    }
+
+    .activeStatus {
+        color: green;
+        width: 1rem;
+        height: 1rem;
+        overflow: hidden;
+        position: relative;
+    }
+
+    .cancelBtn span:last-child {
+        opacity: 1;
+        visibility: visible;
+        transform: translateX(0px);
+        border-left: none;
+        width: 30px;
+        height: 30px;
+    }
+    .cancelBtn span:first-child {
+        opacity: 0;
+        visibility: hidden;
+    }
+    .cancelBtn {
+        width: 30px;
+        height: 30px;
+        border-radius: 50%;
+    }
+    .cancelBtn:not(:disabled):hover span:last-child {
+        opacity: 1;
+        visibility: visible;
+        width: 90px;
+        border-left: none;
+        transform: translateX(0);
+    }
 }

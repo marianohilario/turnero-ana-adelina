@@ -45,6 +45,9 @@
     transition: border-color 0.25s;
     position: relative;
     overflow: hidden;
+    border-color: #fff;
+    border-width: 2px;
+    border-style: outset;
 }
 
 .appointmentBtn span {

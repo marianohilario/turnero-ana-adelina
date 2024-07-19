@@ -2,7 +2,6 @@ import CustomButton from "../CustomButton/CustomButton";
 import styles from "./Appointment.module.css";
 
 const Appointment = ({ date, time, status }) => {
-    console.log(status);
     const children = (
         <span className="icon">
             <svg
@@ -21,17 +20,24 @@ const Appointment = ({ date, time, status }) => {
             <td>{time}</td>
             <td>Servicio</td>
             <td>Duración</td>
-            <td>{status}</td>
             <td>
-                {status !== "cancelled" ? (
-                    <CustomButton
-                        className={styles.cancelBtn}
-                        text={"cancel"}
-                        children={children}
-                    />
-                ) : (
-                    ""
-                )}
+                <span
+                    className={
+                        status === "cancelled"
+                            ? styles.cancelledStatus
+                            : styles.activeStatus
+                    }
+                >
+                    {status}
+                </span>
+            </td>
+            <td>
+                <CustomButton
+                    className={styles.cancelBtn}
+                    text={"Cancel"}
+                    children={children}
+                    disabled={status === "cancelled" ? true : false}
+                />
             </td>
         </tr>
     );
