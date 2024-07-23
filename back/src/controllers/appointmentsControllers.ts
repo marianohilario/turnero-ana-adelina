@@ -9,7 +9,11 @@ import catchAsync from "../utils/catchAsync";
 
 export const getAppointments = catchAsync(
     async (req: Request, res: Response): Promise<void> => {
+        console.log('req', req);
+        console.log('entra al controller');
+        
         const allAppointments = await getAllAppointments();
+        console.log('sale al controller');
         res.status(200).json(allAppointments);
     }
 );
