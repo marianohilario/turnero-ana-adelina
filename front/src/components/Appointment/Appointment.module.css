@@ -67,20 +67,21 @@
     cursor: not-allowed;
 }
 
-.cancelledStatus {
-    background-color: red;
+.cancelledStatus,
+.activeStatus {
     color: #fff;
+    font-weight: 600;
     display: inline-block;
     width: 100px;
     border-radius: 1rem;
+    text-transform: uppercase;
+}
+.cancelledStatus {
+    background-color: red;
 }
 
 .activeStatus {
     background-color: green;
-    color: #fff;
-    display: inline-block;
-    width: 100px;
-    border-radius: 1rem;
 }
 
 @media (max-width: 1024px) {

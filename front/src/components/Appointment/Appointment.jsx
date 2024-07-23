@@ -36,7 +36,7 @@ const Appointment = ({ date, time, status }) => {
                     className={styles.cancelBtn}
                     text={"Cancel"}
                     children={children}
-                    disabled={status === "cancelled" ? true : false}
+                    disabled={status === "cancelled"}
                 />
             </td>
         </tr>

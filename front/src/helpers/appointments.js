@@ -68,7 +68,7 @@ const appointmentsArray = [
         id: 6,
         date: "2024-07-20",
         time: "11:30:00",
-        status: "active",
+        status: "cancelled",
         user: {
             id: 2,
             name: "Mariano",
