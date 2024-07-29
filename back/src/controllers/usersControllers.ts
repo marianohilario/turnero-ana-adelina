@@ -4,8 +4,16 @@ import {
     getAllUsers,
     getUserById,
     logUser,
+    usersWithUsername,
 } from "../services/userServices";
 import catchAsync from "../utils/catchAsync";
+
+export const getUsersWithUsername = catchAsync(
+    async (req: Request, res: Response): Promise<void> => {
+        const AllUsers = await usersWithUsername();
+        res.status(200).json(AllUsers);
+    }
+);
 
 export const getUsers = catchAsync(
     async (req: Request, res: Response): Promise<void> => {

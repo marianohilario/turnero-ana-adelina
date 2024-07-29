@@ -28,6 +28,9 @@ export class User {
     @Column({ type: "integer" })
     nDni: number;
 
+    @Column()
+    phone: string;
+
     @OneToOne(() => UserCredential)
     @JoinColumn()
     credential: UserCredential;

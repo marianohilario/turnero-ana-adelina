@@ -23,8 +23,6 @@ export const generateCredential = async (
 export const credentialsValidator = async (
     credentials: IDtoLogin
 ): Promise<UserCredential> => {
-    console.log(credentials.username);
-
     const { username, password } = credentials;
     const usernameExist = await CredentialRepository.findOneBy({ username });
     if (!usernameExist) throw new AuxError("Username does not exist.", 400);

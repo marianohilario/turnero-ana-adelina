@@ -4,6 +4,7 @@ import AuxError from "../utils/AuxiliarError";
 import { credentialsValidator, generateCredential } from "./credentialServices";
 import { UserRepository } from "../repositories/UserRepository";
 import { User } from "../entities/User";
+import { UserCredential } from "../entities/Credential";
 
 export const getAllUsers = async (): Promise<User[]> => {
     const users = await UserRepository.find({
@@ -44,4 +45,12 @@ export const logUser = async (credentials: IDtoCredential) => {
     });
     if (user) return { login: true, user };
     throw new AuxError("Credentials does not match any user", 400);
+};
+
+export const usersWithUsername = async () => {
+    const profiles = await UserRepository.createQueryBuilder("user")
+        .leftJoinAndSelect("user.credential", "credential")
+        .select(["user.nDni", "user.email", "credential.username"])
+        .getMany();
+    return profiles
 };

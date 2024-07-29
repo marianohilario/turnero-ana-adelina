@@ -3,7 +3,7 @@ const NavbarLogo = () => {
     return (
         <>
             <div className={styles.navbarLogo}>
-                <img src="./LogoAnaAdelina-removebg-preview (1).png" alt="" />
+                <img src="./LogoAnaAdelina-removebg.png" alt="" />
             </div>
         </>
     );

@@ -1,6 +1,6 @@
 .navbarLinksContainer {
     position: relative;
-    width: 60%;
+    width: 70%;
 }
 
 .menuToggle {
@@ -38,6 +38,12 @@
 
 .navbarLinks li a:hover::before {
     transform: scaleX(1);
+}
+
+.navbarLeft,
+.navbarRight {
+    display: flex;
+    gap: 20px;
 }
 
 .burgerMenu,

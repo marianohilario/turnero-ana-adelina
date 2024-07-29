@@ -33,27 +33,30 @@ const NavbarLinks = () => {
                     <path d="M2.146 2.854a.5.5 0 1 1 .708-.708L8 7.293l5.146-5.147a.5.5 0 0 1 .708.708L8.707 8l5.147 5.146a.5.5 0 0 1-.708.708L8 8.707l-5.146 5.147a.5.5 0 0 1-.708-.708L7.293 8z" />
                 </svg>
             </label>
-
-            <ul className={styles.navbarLinks}>
-                <li>
-                    <a href="#">Inicio</a>
-                </li>
-                <li>
-                    <a href="#">Sobre Mi</a>
-                </li>
-                <li>
-                    <a href="#">Servicios</a>
-                </li>
-                <li>
-                    <a href="#">Agendar Cita</a>
-                </li>
-                <li>
-                    <a href="#">Fotos</a>
-                </li>
-                <li>
-                    <a href="#">Contacto</a>
-                </li>
-            </ul>
+            <div className={styles.navbarLinks}>
+                <ul className={styles.navbarLeft}>
+                    <li>
+                        <a href="#">Inicio</a>
+                    </li>
+                    <li>
+                        <a href="#">Servicios</a>
+                    </li>
+                    <li>
+                        <a href="#">Agendar Cita</a>
+                    </li>
+                    <li>
+                        <a href="#">Contacto</a>
+                    </li>
+                </ul>
+                <ul className={styles.navbarRight}>
+                    <li>
+                        <a href="#">Register</a>
+                    </li>
+                    <li>
+                        <a href="#">Login</a>
+                    </li>
+                </ul>
+            </div>
         </div>
     );
 };

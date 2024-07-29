@@ -6,11 +6,9 @@ import AuxError from "./utils/AuxiliarError";
 
 const server = express();
 server.use(morgan("dev"));
-server.use(cors);
-console.log("pasó cors");
+server.use(cors());
 
 server.use(express.json());
-console.log("pasó express.json");
 server.use(indexRouter);
 server.use((err: AuxError, req: Request, res: Response, next: NextFunction) => {
     err.statusCode = err.statusCode || 500;
