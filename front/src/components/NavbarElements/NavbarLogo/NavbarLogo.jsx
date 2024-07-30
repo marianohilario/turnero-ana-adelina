@@ -1,9 +1,12 @@
 import styles from "./NavbarLogo.module.css";
+import { Link } from "react-router-dom";
 const NavbarLogo = () => {
     return (
         <>
             <div className={styles.navbarLogo}>
-                <img src="./LogoAnaAdelina-removebg.png" alt="" />
+                <Link to={"/"}>
+                    <img src="./LogoAnaAdelina-removebg.png" alt="" />
+                </Link>
             </div>
         </>
     );

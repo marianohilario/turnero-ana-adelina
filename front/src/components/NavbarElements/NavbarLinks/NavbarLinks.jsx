@@ -1,4 +1,5 @@
 import styles from "./NavbarLinks.module.css";
+import { Link } from "react-router-dom";
 
 const NavbarLinks = () => {
     return (
@@ -36,24 +37,24 @@ const NavbarLinks = () => {
             <div className={styles.navbarLinks}>
                 <ul className={styles.navbarLeft}>
                     <li>
-                        <a href="#">Inicio</a>
+                        <Link to={"/"}>Inicio</Link>
                     </li>
                     <li>
-                        <a href="#">Servicios</a>
+                        <Link to={"/services"}>Servicios</Link>
                     </li>
                     <li>
-                        <a href="#">Agendar Cita</a>
+                        <Link to={"/appointments"}>Agendar Cita</Link>
                     </li>
                     <li>
-                        <a href="#">Contacto</a>
+                        <Link to={"/contact"}>Contacto</Link>
                     </li>
                 </ul>
                 <ul className={styles.navbarRight}>
                     <li>
-                        <a href="#">Register</a>
+                        <Link to={"/register"}>Register</Link>
                     </li>
                     <li>
-                        <a href="#">Login</a>
+                        <Link to={"/login"}>Login</Link>
                     </li>
                 </ul>
             </div>

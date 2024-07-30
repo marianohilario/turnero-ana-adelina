@@ -1,7 +1,12 @@
 import CustomButton from "../../components/CustomButton/CustomButton";
 import Social from "../../components/Social/Social";
 import styles from "./Home.module.css";
+import { useNavigate } from "react-router-dom";
 const Home = () => {
+    const navigate = useNavigate();
+    const handleOnClic = () => {
+        navigate("/appointments");
+    };
     return (
         <section className={styles.homeContainer}>
             <div className={styles.homeInfo}>
@@ -10,10 +15,8 @@ const Home = () => {
                 <CustomButton
                     className={styles.appointmentBtn}
                     text={"Agendar Cita"}
+                    onClick={handleOnClic}
                 />
-                {/* <a className={styles.appointmentBtn} href="#">
-                    Agendar cita
-                </a> */}
             </div>
             <Social />
         </section>
