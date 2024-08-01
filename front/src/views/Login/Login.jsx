@@ -48,7 +48,6 @@ const Login = () => {
                     toast.error("Error en el login.");
                 }
             } catch (error) {
-                console.log("entra al catch", error);
                 toast.error("Error en el login.");
             }
         }

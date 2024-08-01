@@ -12,14 +12,47 @@ const MySwal = withReactContent(Swal);
 
 const EventDetails = ({
     selectedDay,
-    currentMonth,
-    currentYear,
     formatDay,
     formatDate,
     appointmentsToShow,
 }) => {
     const dispatch = useDispatch();
 
+    const fetchCancelAppointment = async (id) => {
+        try {
+            await axios.put(`http://localhost:3000/appointments/cancel/${id}`);
+            dispatch(cancelAppointment(id));
+            toast.success("Cita cancelada exitosamente.");
+        } catch (error) {
+            toast.error("Hubo un problema al cancelar la cita.");
+        }
+    };
+    
+    const sendCancelNotification = async (appId) => {
+        const appointmetToCancel = appointmentsToShow.filter(
+            (appointment) => appointment.id === appId
+        );
+        const dataToSend = {
+            name: appointmetToCancel[0].user.name.split(" ")[0],
+            email: appointmetToCancel[0].user.email,
+            service: appointmetToCancel[0].service.title,
+            date: appointmetToCancel[0].date,
+            time: appointmetToCancel[0].time,
+        };
+        try {
+            const response = await axios.post(
+                "http://localhost:3000/mails/cancelappointment",
+                dataToSend
+            );
+            if (response.status === 200) {
+                toast.success(`Se te ha enviado un email confirmando la cita.`);
+            } else {
+                throw new Error("Error en el envío del correo de cancelación.");
+            }
+        } catch (error) {
+            throw new Error("Error en el envío del correo de cancelación.");
+        }
+    };
     const handleCancellBtn = async (id) => {
         MySwal.fire({
             title: "Confirmar cancelación",
@@ -32,15 +65,8 @@ const EventDetails = ({
             cancelButtonText: "No, mantener",
         }).then(async (result) => {
             if (result.isConfirmed) {
-                try {
-                    await axios.put(
-                        `http://localhost:3000/appointments/cancel/${id}`
-                    );
-                    dispatch(cancelAppointment(id));
-                    toast.success("Cita cancelada exitosamente.");
-                } catch (error) {
-                    toast.error("Hubo un problema al cancelar la cita.");
-                }
+                await fetchCancelAppointment(id);
+                await sendCancelNotification(id);
             } else {
                 toast.info("La cancelación ha sido abortada.");
             }

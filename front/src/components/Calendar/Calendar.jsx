@@ -230,6 +230,7 @@ const Calendar = () => {
 
     return (
         <div className={styles.container}>
+            <div className={styles.fondoImg}></div>
             <div className={styles.left}>
                 <div className={styles.calendarContainer}>
                     <CalendarHeader
@@ -249,8 +250,6 @@ const Calendar = () => {
             <div className={styles.right}>
                 <EventDetails
                     selectedDay={selectedDay}
-                    currentMonth={currentMonth}
-                    currentYear={currentYear}
                     formatDay={formatDay}
                     formatDate={formatDate}
                     handleAddEventClick={handleAddEventClick}

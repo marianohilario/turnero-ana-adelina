@@ -78,10 +78,6 @@ const Register = () => {
         }
     };
 
-    useEffect(() => {
-        console.log(userData);
-    }, [userData]);
-
     const handleBlur = (e, hasChanged) => {
         const { name, value } = e.target;
 

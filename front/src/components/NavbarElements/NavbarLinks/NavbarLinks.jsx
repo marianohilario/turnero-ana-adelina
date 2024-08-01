@@ -1,6 +1,7 @@
 import styles from "./NavbarLinks.module.css";
 import { Link, useLocation } from "react-router-dom";
 import { useSelector } from "react-redux";
+import Profile from "../../Profile/Profile";
 
 const NavbarLinks = () => {
     const user = useSelector((state) => state.user);
@@ -68,6 +69,7 @@ const NavbarLinks = () => {
                         )}
                     </ul>
                 )}
+                {user.name && <Profile />}
             </div>
         </div>
     );

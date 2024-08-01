@@ -11,6 +11,7 @@
     display: flex;
     width: 100%;
     justify-content: space-between;
+    align-items: start;
     padding-right: 5rem;
 }
 
@@ -43,6 +44,7 @@
 
 .navbarLeft,
 .navbarRight {
+    margin-top: 1rem;
     display: flex;
     gap: 20px;
 }

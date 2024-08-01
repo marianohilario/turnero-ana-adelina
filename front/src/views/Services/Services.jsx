@@ -8,7 +8,6 @@ import Card from "../../components/Card/Card";
 const Services = () => {
     const globalServices = useSelector((store) => store.services);
     const dispatch = useDispatch();
-    console.log(globalServices);
     useEffect(() => {
         !globalServices.length &&
             axios

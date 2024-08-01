@@ -46,7 +46,6 @@ export const validation = (name, value, userData, users) => {
             } else if (users.find((e) => e.nDni === parseInt(value))) {
                 errors.nDni = "El DNI ya se encuentra registrado";
             } else if (!/^(?:\d{1,3})(?:\.\d{3}){2}$/.test(value)) {
-                console.log(value.length);
                 errors.nDni = "El número de DNI debe tener 8 dígitos";
             } else {
                 errors.nDni = undefined;

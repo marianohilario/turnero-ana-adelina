@@ -2,7 +2,7 @@ import { useRef, useEffect, useState } from "react";
 import styles from "../Calendar/Calendar.module.css";
 import CustomButton from "../CustomButton/CustomButton";
 import { useDispatch, useSelector } from "react-redux";
-import { setServices } from "../../redux/serviceSlicer";
+import { serviceSlice, setServices } from "../../redux/serviceSlicer";
 import axios from "axios";
 import { toast } from "react-toastify";
 import { addAppointment } from "../../redux/userAppointmentsSlicer";
@@ -32,6 +32,8 @@ const AddEvent = ({
         UserId: user.id,
         serviceId: selectedService,
     });
+
+    const [isLoading, setIsLoading] = useState(false);
 
     useEffect(() => {
         setAppointmentData({
@@ -93,41 +95,73 @@ const AddEvent = ({
         );
     }
 
-    const handleOnSubmit = (event) => {
+    const handleOnSubmit = async (event) => {
         event.preventDefault();
         if (!selectedService || !selectedTime) {
             toast.warning(
                 "Debes seleccionar un servicio y horario para continuar."
             );
-        } else {
-            axios
-                .post(
-                    `http://localhost:3000/appointments/schedule`,
-                    appointmentData
-                )
-                .then((response) => {
-                    if (response.status !== 201) {
-                        throw new Error(
-                            "Network response was not ok " + response.statusText
-                        );
-                    }
-                    return response.data;
-                })
-                .then((data) => {
-                    dispatch(addAppointment(data));
-                    toast.success("Cita creada exitosamente.");
-                    setIsAddEventActive(false);
-                    setSelectedService("");
-                    setSelectedTime("");
-                })
-                .catch((error) => {
-                    error.response.data.message !== "No services to show" &&
-                        console.error(
-                            "There was a problem with the axios operation:",
-                            error
-                        );
-                    toast.error("Error al crear la cita. Intentar nuevamente.");
-                });
+            return;
+        }
+
+        try {
+            setIsLoading(true);
+            await scheduleAppointment();
+            await sendEmailNotification();
+            setIsAddEventActive(false);
+            setSelectedService("");
+            setSelectedTime("");
+        } catch (error) {
+            toast.error("Error al procesar la solicitud. Intentar nuevamente.");
+        }
+    };
+
+    const scheduleAppointment = async () => {
+        try {
+            const response = await axios.post(
+                `http://localhost:3000/appointments/schedule`,
+                appointmentData
+            );
+
+            if (response.status !== 201) {
+                throw new Error(
+                    "Network response was not ok " + response.statusText
+                );
+            } else {
+                dispatch(addAppointment(response.data));
+                toast.success("Cita creada exitosamente.");
+            }
+        } catch (error) {
+            console.error(
+                "There was a problem with the axios operation:",
+                error
+            );
+            throw new Error("Error al crear la cita.");
+        }
+    };
+
+    const sendEmailNotification = async () => {
+        const dataToSend = {
+            name: String(user.name).split(" ")[0],
+            email: user.email,
+            service: selectedServiceDetails.title,
+            date: appointmentData.date,
+            time: appointmentData.time,
+        };
+        try {
+            const response = await axios.post(
+                "http://localhost:3000/mails/confirmappointment",
+                dataToSend
+            );
+            if (response.status === 200) {
+                toast.success(`Se te ha enviado un email confirmando la cita.`);
+            } else {
+                throw new Error("Error en el envío del correo.");
+            }
+        } catch (error) {
+            throw new Error("Error en el envío del correo.");
+        } finally {
+            setIsLoading(false);
         }
     };
 
@@ -170,6 +204,7 @@ const AddEvent = ({
                 ></i>
             </div>
             <form action="" onSubmit={handleOnSubmit}>
+                {isLoading && <div className={styles.loader}></div>}
                 <div className={styles.addEventBody}>
                     <div className={styles.addEventService}>
                         <label htmlFor="servicios" className={styles.formLabel}>

@@ -1,0 +1,101 @@
+.profileContainer {
+    text-align: end;
+    position: relative;
+}
+
+.profileImg {
+    width: 60px;
+    height: 60px;
+    border-radius: 50%;
+    border: 3px solid #fff;
+    cursor: pointer;
+    transition: 0.3s ease;
+}
+
+.profileImg:hover {
+    box-shadow: 0 0 10px #fff;
+}
+
+.profileDetail {
+    background-color: #fff;
+    color: #e25c7f;
+    padding: 10px;
+    width: fit-content;
+    clip-path: polygon(75% 8%, 80% 0, 85% 8%, 100% 8%, 100% 100%, 0 100%, 0 8%);
+    border-radius: 5px;
+    display: none;
+    position: absolute;
+    top: 100%;
+    right: 0;
+}
+
+.profileDetail.active {
+    display: block;
+}
+
+.profileDetail h3 {
+    margin-bottom: 0.5rem;
+}
+
+.changeAvatar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 20px;
+}
+
+.changeAvatar button {
+    background-color: #fff;
+    color: #e25c7f;
+    border: 1px solid #e25c7f;
+    padding: 5px;
+    border-radius: 5px;
+    height: 26px;
+    transition: 0.3s ease;
+}
+
+.changeAvatar button:hover {
+    background-color: #e25c7f;
+    color: #fff;
+    box-shadow: 0 0 10px #e25c7f;
+    cursor: pointer;
+}
+
+.inputSelect {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    opacity: 0;
+    cursor: pointer;
+}
+
+.avatarSelect {
+    position: relative;
+    display: inline-block;
+    cursor: pointer;
+    border-radius: 50%;
+}
+
+.avatarSelect:hover {
+    background-color: #fff;
+    color: #e25c7f;
+    box-shadow: 0 0 10px #e25c7f;
+}
+
+.avatarSelect i {
+    font-size: 20px;
+    cursor: pointer;
+    padding: 7px;
+    border: 1px solid #e25c7f;
+    border-radius: 50%;
+    background-color: #fff;
+    color: #e25c7f;
+    cursor: pointer;
+}
+
+.inputSelect:hover {
+    background-color: #fff;
+    color: #e25c7f;
+    box-shadow: 0 0 10px #e25c7f;
+    cursor: pointer;
+}

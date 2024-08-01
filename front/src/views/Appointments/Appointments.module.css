@@ -16,10 +16,11 @@
     content: "";
     position: absolute;
     inset: 0 0 0 0;
+    opacity: 0.6;
+    background-image: url("appointments.png");
     background-repeat: no-repeat;
-    background-position: center;
-    background-size: contain;
-    opacity: 0.05;
+    background-position: left bottom calc(0% - 110px);
+    background-size: auto;
 }
 
 .appointmentsHeader {
