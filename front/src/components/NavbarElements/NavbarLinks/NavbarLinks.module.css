@@ -1,6 +1,6 @@
 .navbarLinksContainer {
     position: relative;
-    width: 70%;
+    width: 50%;
 }
 
 .menuToggle {
@@ -10,12 +10,13 @@
 .navbarLinks {
     display: flex;
     width: 100%;
-    justify-content: space-evenly;
+    justify-content: space-between;
+    padding-right: 5rem;
 }
 
 .navbarLinks li {
     list-style: none;
-    text-transform: uppercase;
+    text-transform: capitalize;
 }
 
 .navbarLinks li a {

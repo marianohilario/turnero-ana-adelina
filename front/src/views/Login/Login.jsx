@@ -1,12 +1,17 @@
 import styles from "./Login.module.css";
 import CustomInput from "../../components/CustomInput/CustomInput";
 import CustomButton from "../../components/CustomButton/CustomButton";
-import { useEffect, useState } from "react";
-import { validation } from "../../helpers/registerFormValidation";
+import { useState } from "react";
 import axios from "axios";
-import Swal from "sweetalert2";
+import { toast } from "react-toastify";
+import { useDispatch } from "react-redux";
+import { setUser } from "../../redux/userSlicer";
+import { useNavigate } from "react-router-dom";
 
 const Login = () => {
+    const dispatch = useDispatch();
+    const navigate = useNavigate();
+
     const [userData, setUserData] = useState({
         username: "",
         password: "",
@@ -18,12 +23,9 @@ const Login = () => {
     };
     const handleSubmit = async (e) => {
         e.preventDefault();
+
         if (userData.username === "" || userData.password === "") {
-            Swal.fire({
-                icon: "warning",
-                title: "Existen errores en la carga de datos",
-                text: "Por favor, completar username y contraseña.",
-            });
+            toast.warning("Debes completar todos los campos para continuar.");
         } else {
             try {
                 const response = await axios.post(
@@ -31,28 +33,23 @@ const Login = () => {
                     userData
                 );
                 if (response.status === 200) {
-                    Swal.fire({
-                        icon: "success",
-                        title: "Usuario Logueado con éxito!",
-                        text: "El usuario ha sido logueado correctamente.",
-                    });
+                    dispatch(setUser(response.data.user));
+                    toast.success(
+                        `${
+                            response.data.user.name.split(" ")[0]
+                        } te has logueado con éxito.`
+                    );
                     setUserData({
                         username: "",
                         password: "",
                     });
+                    navigate("/");
                 } else {
-                    Swal.fire({
-                        icon: "error",
-                        title: "Error en el login",
-                        text: `${response.statusText}`,
-                    });
+                    toast.error("Error en el login.");
                 }
             } catch (error) {
-                Swal.fire({
-                    icon: "error",
-                    title: "Error en el login",
-                    text: `${error.response.data.message}`,
-                });
+                console.log("entra al catch", error);
+                toast.error("Error en el login.");
             }
         }
     };

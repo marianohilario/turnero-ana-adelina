@@ -34,8 +34,24 @@ const InputComponent = ({
         setInitialValue(value);
     }, [value]);
 
+    const capitalizeWords = (str) => {
+        return str
+            .split(" ")
+            .map((word) => word.charAt(0).toUpperCase() + word.slice(1))
+            .join(" ");
+    };
     const handleChange = (e) => {
-        setInputValue(e.target.value);
+        const { name, value } = e.target;
+        name === "name"
+            ? setInputValue(capitalizeWords(value))
+            : name === "nDni"
+            ? setInputValue(
+                  e.target.value
+                      .replace(/\D/g, "")
+                      .replace(/\B(?=(\d{3})+(?!\d))/g, ".")
+              )
+            : setInputValue(e.target.value);
+        // setInputValue(e.target.value);
         if (onChange) {
             onChange(e);
         }

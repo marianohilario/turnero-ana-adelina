@@ -1,12 +1,12 @@
 import { useState, useEffect } from "react";
 import styles from "./Calendar.module.css";
-import serviciosBelleza from "../../helpers/services";
 import CalendarHeader from "../CalendarHeader/CalendarHeader";
 import CalendarDays from "../CalendarDays/CalendarDays";
 import EventDetails from "../EventDetails/EventDetails";
 import AddEvent from "../AddEvent/AddEvent";
+import { useSelector } from "react-redux";
 
-const Calendar = ({ appointments }) => {
+const Calendar = () => {
     const months = [
         "Enero",
         "Febrero",
@@ -32,10 +32,11 @@ const Calendar = ({ appointments }) => {
         "Sábado",
     ];
 
+    const userAppointments = useSelector((store) => store.userAppointments);
+    const initialDay = new Date().getDate();
     const [currentMonth, setCurrentMonth] = useState(new Date().getMonth());
     const [currentYear, setCurrentYear] = useState(new Date().getFullYear());
     const [selectedDay, setSelectedDay] = useState(new Date().getDate());
-    const [services, setServices] = useState([]);
     const [selectedService, setSelectedService] = useState("");
     const [selectedTime, setSelectedTime] = useState("");
     const [isAddEventActive, setIsAddEventActive] = useState(false);
@@ -43,14 +44,11 @@ const Calendar = ({ appointments }) => {
 
     useEffect(() => {
         handleDayEvents(selectedDay);
-    }, []);
-    useEffect(() => {
-        setServices(serviciosBelleza);
-    }, []);
+    }, [userAppointments, selectedDay, currentMonth, currentYear]);
 
     useEffect(() => {
         renderCalendar();
-    }, [currentMonth, currentYear, selectedDay]);
+    }, [userAppointments, currentMonth, currentYear, selectedDay]);
 
     const renderCalendar = () => {
         const firstDay = new Date(currentYear, currentMonth, 1).getDay();
@@ -86,7 +84,7 @@ const Calendar = ({ appointments }) => {
         // Current month days
         for (let i = 1; i <= lastDayDate; i++) {
             let event = false;
-            appointments.forEach((element) => {
+            userAppointments.forEach((element) => {
                 const [year, month, date] = element.date.split("-").map(Number);
                 if (
                     date === i &&
@@ -137,7 +135,7 @@ const Calendar = ({ appointments }) => {
     };
 
     const handleDayEvents = (day) => {
-        const dayEvents = appointments.filter((element) => {
+        const dayEvents = userAppointments.filter((element) => {
             const [year, month, date] = element.date.split("-").map(Number);
             return (
                 date === day &&
@@ -164,8 +162,19 @@ const Calendar = ({ appointments }) => {
             }
             return currentMonth - 1;
         });
-        setSelectedDay(null);
     };
+    useEffect(() => {
+        if (
+            initialDay === new Date().getDate() &&
+            currentMonth === new Date().getMonth() &&
+            currentYear === new Date().getFullYear()
+        ) {
+            setSelectedDay(initialDay);
+            handleDayEvents(initialDay);
+        } else {
+            setSelectedDay(null);
+        }
+    }, [currentMonth]);
 
     const handleNextBtn = () => {
         setCurrentMonth((currentMonth) => {
@@ -195,10 +204,6 @@ const Calendar = ({ appointments }) => {
         const month = months[date.getMonth()];
         return `${day} de ${month}`;
     };
-
-    const selectedServiceDetails = services.find(
-        (service) => service.id === parseInt(selectedService)
-    );
 
     const generarHorarios = (inicio, fin, intervalo) => {
         const horarios = [];
@@ -244,26 +249,37 @@ const Calendar = ({ appointments }) => {
             <div className={styles.right}>
                 <EventDetails
                     selectedDay={selectedDay}
+                    currentMonth={currentMonth}
+                    currentYear={currentYear}
                     formatDay={formatDay}
                     formatDate={formatDate}
                     handleAddEventClick={handleAddEventClick}
                     appointmentsToShow={appointmentsToShow}
                 />
                 <AddEvent
-                    services={services}
+                    selectedDay={selectedDay}
+                    currentMonth={currentMonth}
+                    currentYear={currentYear}
                     selectedService={selectedService}
+                    setSelectedService={setSelectedService}
                     handleServiceSelectChange={handleServiceSelectChange}
                     selectedTime={selectedTime}
+                    setSelectedTime={setSelectedTime}
                     handleTimeSelectChange={handleTimeSelectChange}
-                    selectedServiceDetails={selectedServiceDetails}
                     horariosDisponibles={horariosDisponibles}
                     isAddEventActive={isAddEventActive}
                     handleAddEventClick={handleAddEventClick}
                     setIsAddEventActive={setIsAddEventActive}
                 />
-                <div className={styles.addEvent} onClick={handleAddEventClick}>
-                    <i className="fas fa-plus"></i>
-                </div>
+                {new Date(currentYear, currentMonth, selectedDay) >=
+                    new Date().setHours(0, 0, 0, 0) && (
+                    <div
+                        className={styles.addEvent}
+                        onClick={handleAddEventClick}
+                    >
+                        <i className="fas fa-plus"></i>
+                    </div>
+                )}
             </div>
         </div>
     );

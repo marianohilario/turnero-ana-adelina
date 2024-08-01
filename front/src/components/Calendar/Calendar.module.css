@@ -114,6 +114,11 @@
     transform: scale(1.01);
 }
 
+.cancelBtn:focus {
+    outline: none;
+    transform: scale(0.95);
+}
+
 .addEventWrapper {
     position: absolute;
     bottom: 100px;
@@ -156,7 +161,7 @@
 
 .addEventBody {
     width: 100%;
-    height: fit-content;
+    height: 132px;
     display: flex;
     flex-direction: column;
     align-items: start;
@@ -220,14 +225,21 @@
     transition: 0.3s ease;
 }
 
-.addEventBtn:hover {
+.addEventBtn:not(:disabled):hover {
     color: #fff;
     background-color: #e25c7f;
     box-shadow: 0 0 10px #e25c7f;
 }
 
-.addEventBtn:focus {
+.addEventBtn:not(:disabled):focus {
     outline: none;
+}
+
+.addEventBtn:disabled {
+    background-color: #d3d3d3;
+    color: #fff;
+    border-color: #d3d3d3;
+    cursor: not-allowed;
 }
 
 .addEventWrapper.active {
@@ -336,7 +348,6 @@
 .days {
     display: flex;
     flex-wrap: wrap;
-    /* width: max(363px, 0.9vw); */
     width: 100%;
 }
 
@@ -363,6 +374,11 @@
     border-radius: 6px;
     background-color: #e25c7f;
 }
+
+.day.event.selected::after {
+    background-color: #fff;
+}
+
 .day:not(.prev):not(.next):hover.event::after {
     background-color: #fff;
 }

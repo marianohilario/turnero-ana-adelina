@@ -4,6 +4,8 @@ import CustomButton from "../../components/CustomButton/CustomButton";
 import { useEffect, useState } from "react";
 import { validation } from "../../helpers/registerFormValidation";
 import axios from "axios";
+import { toast } from "react-toastify";
+import { useNavigate } from "react-router-dom";
 import Swal from "sweetalert2";
 
 const Register = () => {
@@ -25,6 +27,8 @@ const Register = () => {
         nDni: false,
         email: false,
     });
+
+    const navigate = useNavigate();
 
     useEffect(() => {
         const fetchUsers = async () => {
@@ -63,13 +67,20 @@ const Register = () => {
         const { name, value } = event.target;
         setUserData((prevState) => ({
             ...prevState,
-            [name]: name === "nDni" ? Number(value) : value,
+            [name]:
+                name === "nDni"
+                    ? Number(value.replace(/\D/g, ""))
+                    : value.trim(),
         }));
 
         if (name in errors) {
             validateField(name, value);
         }
     };
+
+    useEffect(() => {
+        console.log(userData);
+    }, [userData]);
 
     const handleBlur = (e, hasChanged) => {
         const { name, value } = e.target;
@@ -91,11 +102,7 @@ const Register = () => {
                     dataToSend
                 );
                 if (response.status === 201) {
-                    Swal.fire({
-                        icon: "success",
-                        title: "Usuario registrado con éxito!",
-                        text: "El usuario ha sido registrado correctamente.",
-                    });
+                    toast.success(`Usuario registrado con éxito.`);
                     setUserData({
                         name: "",
                         username: "",
@@ -107,26 +114,17 @@ const Register = () => {
                         password2: "",
                     });
                     setErrors({});
+                    navigate("/login");
                 } else {
-                    Swal.fire({
-                        icon: "error",
-                        title: "Error en el registro",
-                        text: response.statusText,
-                    });
+                    toast.error("Error al registrarse.");
                 }
             } catch (error) {
-                Swal.fire({
-                    icon: "error",
-                    title: "Error en el registro",
-                    text: error.message,
-                });
+                toast.error("Error al registrarse.");
             }
         } else {
-            Swal.fire({
-                icon: "warning",
-                title: "Existen errores en la carga de datos",
-                text: "Por favor, revisa los errores en el formulario.",
-            });
+            toast.warning(
+                "Existen errores en la carga de datos. Por favor, revisa los errores en el formulario."
+            );
         }
     };
 

@@ -53,3 +53,17 @@ export const cancelAppointmentById = async (id: number) => {
 
     return updateAppointment;
 };
+
+export const AppointmentsByUserId = async (
+    id: number
+): Promise<Appointment[]> => {
+    const userAppointments = await AppointmentRepository.find({
+        where: { user: { id } },
+        relations: {
+            service: true,
+        },
+    });
+    if (!userAppointments)
+        throw new AuxError("Appointment id does not exist", 404);
+    return userAppointments;
+};

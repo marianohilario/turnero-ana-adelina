@@ -1,7 +1,10 @@
 import styles from "./NavbarLinks.module.css";
-import { Link } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
+import { useSelector } from "react-redux";
 
 const NavbarLinks = () => {
+    const user = useSelector((state) => state.user);
+    const location = useLocation();
     return (
         <div className={styles.navbarLinksContainer}>
             <input
@@ -42,21 +45,29 @@ const NavbarLinks = () => {
                     <li>
                         <Link to={"/services"}>Servicios</Link>
                     </li>
-                    <li>
-                        <Link to={"/appointments"}>Agendar Cita</Link>
-                    </li>
+                    {user.user !== null && (
+                        <li>
+                            <Link to={"/appointments"}>Mis Turnos</Link>
+                        </li>
+                    )}
                     <li>
                         <Link to={"/contact"}>Contacto</Link>
                     </li>
                 </ul>
-                <ul className={styles.navbarRight}>
-                    <li>
-                        <Link to={"/register"}>Register</Link>
-                    </li>
-                    <li>
-                        <Link to={"/login"}>Login</Link>
-                    </li>
-                </ul>
+                {!user.name && (
+                    <ul className={styles.navbarRight}>
+                        {location.pathname !== "/register" && (
+                            <li>
+                                <Link to={"/register"}>Registrate</Link>
+                            </li>
+                        )}
+                        {location.pathname !== "/login" && (
+                            <li>
+                                <Link to={"/login"}>Login</Link>
+                            </li>
+                        )}
+                    </ul>
+                )}
             </div>
         </div>
     );

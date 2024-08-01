@@ -2,6 +2,8 @@ import { useEffect, useState } from "react";
 import styles from "./Appointments.module.css";
 import axios from "axios";
 import Calendar from "../../components/Calendar/Calendar";
+import { useSelector, useDispatch } from "react-redux";
+import { setUserAppointments } from "../../redux/userAppointmentsSlicer";
 
 const AppointmentsHeader = () => (
     <div className={styles.appointmentsHeader}>
@@ -13,11 +15,12 @@ const AppointmentsHeader = () => (
 );
 
 const Appointments = () => {
-    const [appointmentsToRender, setAppointmentsToRender] = useState([]);
+    const user = useSelector((store) => store.user);
+    const dispatch = useDispatch();
 
     useEffect(() => {
         axios
-            .get("http://localhost:3000/appointments/")
+            .get(`http://localhost:3000/appointments/user/${user.id}`)
             .then((response) => {
                 if (response.status !== 200) {
                     throw new Error(
@@ -27,19 +30,20 @@ const Appointments = () => {
                 return response.data;
             })
             .then((data) => {
-                setAppointmentsToRender(data);
+                dispatch(setUserAppointments(data));
             })
             .catch((error) => {
-                console.error(
-                    "There was a problem with the axios operation:",
-                    error
-                );
+                error.response.data.message !== "No appointments to show" &&
+                    console.error(
+                        "There was a problem with the axios operation:",
+                        error
+                    );
             });
-    }, []);
+    }, [dispatch, user.id]);
     return (
         <div className={styles.appointmentsContainer}>
             <AppointmentsHeader />
-            <Calendar appointments={appointmentsToRender} />
+            <Calendar />
         </div>
     );
 };

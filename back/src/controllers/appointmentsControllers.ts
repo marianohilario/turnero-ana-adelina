@@ -1,5 +1,6 @@
 import { Request, Response } from "express";
 import {
+    AppointmentsByUserId,
     cancelAppointmentById,
     createAppointment,
     getAllAppointments,
@@ -36,3 +37,11 @@ export const cancelAppointment = catchAsync(
         res.status(200).json(appointmentUpdated);
     }
 );
+
+export const getAppointmentByUserId = catchAsync(
+    async (req: Request, res: Response): Promise<void> => {
+        const userId = parseInt(req.params.id);
+        const appointmentsByUserId = await AppointmentsByUserId(userId);
+        res.status(200).json(appointmentsByUserId);
+    }
+)
