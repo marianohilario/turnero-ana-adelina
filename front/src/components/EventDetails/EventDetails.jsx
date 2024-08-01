@@ -27,7 +27,7 @@ const EventDetails = ({
             toast.error("Hubo un problema al cancelar la cita.");
         }
     };
-    
+
     const sendCancelNotification = async (appId) => {
         const appointmetToCancel = appointmentsToShow.filter(
             (appointment) => appointment.id === appId
@@ -125,7 +125,7 @@ const EventDetails = ({
                                 )}
                             </span>
                             {event.status === "active" &&
-                            validateTime(event.date, event.time, 6) ? (
+                            validateTime(event.date, event.time, 24) ? (
                                 <CustomButton
                                     text={"Cancelar"}
                                     className={styles.cancelBtn}
