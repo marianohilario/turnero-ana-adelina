@@ -17,7 +17,7 @@
     position: absolute;
     inset: 0 0 0 0;
     opacity: 0.6;
-    background-image: url("appointments.png");
+    background-image: url(/appointments.png);
     background-repeat: no-repeat;
     background-position: left bottom calc(0% - 110px);
     background-size: auto;
