@@ -1,34 +1,15 @@
 "use strict";
-const nombre = "Mariano";
-console.log(nombre);
-const num1 = 2;
-const num2 = 4;
-const suma = (a, b) => a + b;
-console.log(suma(num1, num2));
-console.log(suma(65, 17));
-var EUser;
-(function (EUser) {
-    EUser["ADMIN"] = "admin";
-    EUser["USER"] = "user";
-})(EUser || (EUser = {}));
-const user1 = {
-    name: 'Mariano',
-    surname: 'Hilario',
-    age: 42,
-    isActive: true,
-    typeUser: EUser.ADMIN,
-    address: {
-        street: 'Calle Falsa 123',
-        city: 'Banfield'
-    }
+var __importDefault = (this && this.__importDefault) || function (mod) {
+    return (mod && mod.__esModule) ? mod : { "default": mod };
 };
-console.log(user1);
-function controlStock(talle) {
-    if (talle === 'M' || talle === 'L')
-        return 'Sin Stock';
-    return 'En stock';
-}
-let talle = 'XL';
-console.log(`${controlStock(talle)} para el talle seleccionado (${talle})`);
-talle = 'XL';
-console.log(`${controlStock(talle)} para el talle seleccionado (${talle})`);
+Object.defineProperty(exports, "__esModule", { value: true });
+const server_1 = __importDefault(require("./server"));
+const envs_1 = require("./config/envs");
+require("reflect-metadata");
+const data_source_1 = require("./config/data-source");
+data_source_1.AppDataSource.initialize().then(() => {
+    console.log("Database connection successful");
+    server_1.default.listen(envs_1.PORT, () => {
+        console.log(`Server listening on port ${envs_1.PORT}`);
+    });
+});

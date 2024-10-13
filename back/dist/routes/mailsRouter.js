@@ -1,24 +1,26 @@
-import { Request, Response, Router } from "express";
-import { USER_MAIL, USER_MAIL_PASSWORD } from "../config/envs";
-import nodemailer from "nodemailer";
-
-const mailsRouter: Router = Router();
-
-const transporter = nodemailer.createTransport({
+"use strict";
+var __importDefault = (this && this.__importDefault) || function (mod) {
+    return (mod && mod.__esModule) ? mod : { "default": mod };
+};
+Object.defineProperty(exports, "__esModule", { value: true });
+const express_1 = require("express");
+const envs_1 = require("../config/envs");
+const nodemailer_1 = __importDefault(require("nodemailer"));
+const mailsRouter = (0, express_1.Router)();
+const transporter = nodemailer_1.default.createTransport({
     host: "smtp.gmail.com",
     port: 465,
     // service: "gmail",
     auth: {
-        user: USER_MAIL,
-        pass: USER_MAIL_PASSWORD,
+        user: envs_1.USER_MAIL,
+        pass: envs_1.USER_MAIL_PASSWORD,
     },
 });
-
-mailsRouter.post("/", (req: Request, res: Response) => {
+mailsRouter.post("/", (req, res) => {
     const { name, email, concern } = req.body;
     const mailOptions = {
         from: email,
-        to: USER_MAIL,
+        to: envs_1.USER_MAIL,
         subject: `Consulta de ${name}`,
         text: `Nombre: ${name}\nEmail: ${email}\nConsulta: ${concern}`,
     };
@@ -29,12 +31,11 @@ mailsRouter.post("/", (req: Request, res: Response) => {
         res.status(200).json({ message: "Email enviado con éxito!" });
     });
 });
-
-mailsRouter.post("/confirmappointment", (req: Request, res: Response) => {
+mailsRouter.post("/confirmappointment", (req, res) => {
     const { name, email, service, date, time } = req.body;
     const [year, month, day] = date.split("-");
     const mailOptions = {
-        from: `"Ana Adelina" <${USER_MAIL}>`,
+        from: `"Ana Adelina" <${envs_1.USER_MAIL}>`,
         to: email,
         subject: `Confirmación de cita en Ana Adelina`,
         text: `Hola ${name}, esperamos te encuentres muy bien!\nTe hemos enviado el presente correo para confirmar que la cita que agendaste para el servicio de ${service} el día ${day} de ${month} de ${year} a las ${time}hs ha sido confirmada.\nTe estaremos esperando.\nAtentamente.\nAna Adelina.`,
@@ -46,12 +47,11 @@ mailsRouter.post("/confirmappointment", (req: Request, res: Response) => {
         res.status(200).json({ message: "Email enviado con éxito!" });
     });
 });
-
-mailsRouter.post("/cancelappointment", (req: Request, res: Response) => {
+mailsRouter.post("/cancelappointment", (req, res) => {
     const { name, email, service, date, time } = req.body;
     const [year, month, day] = date.split("-");
     const mailOptions = {
-        from: `"Ana Adelina" <${USER_MAIL}>`,
+        from: `"Ana Adelina" <${envs_1.USER_MAIL}>`,
         to: email,
         subject: `Cancelación de cita en Ana Adelina`,
         text: `Hola ${name}, esperamos te encuentres muy bien!\nTe hemos enviado el presente correo para confirmar que la cita que agendaste para el servicio de ${service} el día ${day} de ${month} de ${year} a las ${time}hs ha sido CANCELADA tal como lo has solicitado. Si la acción no la realizaste vos, por favor ponete en contacto con nosotros.\nAtentamente.\nAna Adelina.`,
@@ -63,5 +63,4 @@ mailsRouter.post("/cancelappointment", (req: Request, res: Response) => {
         res.status(200).json({ message: "Email enviado con éxito!" });
     });
 });
-
-export default mailsRouter;
+exports.default = mailsRouter;

@@ -100,6 +100,7 @@
 
 .cancelBtn {
     background-color: red;
+    color: white;
     text-transform: uppercase;
     letter-spacing: 1px;
     font-weight: 600;
