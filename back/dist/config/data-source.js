@@ -21,4 +21,9 @@ exports.AppDataSource = new typeorm_1.DataSource({
     entities: [User_1.User, Appointment_1.Appointment, Credential_1.UserCredential, Services_1.Services],
     subscribers: [],
     migrations: [],
+    extra: {
+        ssl: {
+            rejectUnauthorized: false,
+        },
+    },
 });
