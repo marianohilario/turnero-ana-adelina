@@ -47,7 +47,7 @@ const AddEvent = ({
     useEffect(() => {
         !globalServices.length &&
             axios
-                .get(`http://localhost:3000/services`)
+                .get(`https://turnero-ana-adelina.onrender.com/services`)
                 .then((response) => {
                     if (response.status !== 200) {
                         throw new Error(
@@ -119,7 +119,7 @@ const AddEvent = ({
     const scheduleAppointment = async () => {
         try {
             const response = await axios.post(
-                `http://localhost:3000/appointments/schedule`,
+                `https://turnero-ana-adelina.onrender.com/schedule`,
                 appointmentData
             );
 
@@ -150,7 +150,7 @@ const AddEvent = ({
         };
         try {
             const response = await axios.post(
-                "http://localhost:3000/mails/confirmappointment",
+                "https://turnero-ana-adelina.onrender.com/mails/confirmappointment",
                 dataToSend
             );
             if (response.status === 200) {

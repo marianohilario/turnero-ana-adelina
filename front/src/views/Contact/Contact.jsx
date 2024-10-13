@@ -29,7 +29,7 @@ const Contact = () => {
             setIsLoading(true);
             try {
                 const response = await axios.post(
-                    "http://localhost:3000/mails",
+                    "https://turnero-ana-adelina.onrender.com/mails",
                     dataForm
                 );
                 if (response.status === 200) {

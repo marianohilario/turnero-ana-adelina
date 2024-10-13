@@ -34,7 +34,7 @@ const Register = () => {
         const fetchUsers = async () => {
             try {
                 const response = await axios.get(
-                    "http://localhost:3000/users/profiles"
+                    "https://turnero-ana-adelina.onrender.com/users/profiles"
                 );
                 if (response.status !== 200) {
                     throw new Error(
@@ -94,7 +94,7 @@ const Register = () => {
                 const dataToSend = { ...userData };
                 delete dataToSend.password2;
                 const response = await axios.post(
-                    "http://localhost:3000/users/register",
+                    "https://turnero-ana-adelina.onrender.com/users/register",
                     dataToSend
                 );
                 if (response.status === 201) {

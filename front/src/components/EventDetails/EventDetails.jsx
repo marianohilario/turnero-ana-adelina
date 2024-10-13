@@ -20,7 +20,7 @@ const EventDetails = ({
 
     const fetchCancelAppointment = async (id) => {
         try {
-            await axios.put(`http://localhost:3000/appointments/cancel/${id}`);
+            await axios.put(`https://turnero-ana-adelina.onrender.com/appointments/cancel/${id}`);
             dispatch(cancelAppointment(id));
             toast.success("Cita cancelada exitosamente.");
         } catch (error) {
@@ -41,7 +41,7 @@ const EventDetails = ({
         };
         try {
             const response = await axios.post(
-                "http://localhost:3000/mails/cancelappointment",
+                "https://turnero-ana-adelina.onrender.com/mails/cancelappointment",
                 dataToSend
             );
             if (response.status === 200) {

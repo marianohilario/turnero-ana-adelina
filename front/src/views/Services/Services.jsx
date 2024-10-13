@@ -11,7 +11,7 @@ const Services = () => {
     useEffect(() => {
         !globalServices.length &&
             axios
-                .get(`http://localhost:3000/services`)
+                .get(`https://turnero-ana-adelina.onrender.com/services`)
                 .then((response) => {
                     if (response.status !== 200) {
                         throw new Error(

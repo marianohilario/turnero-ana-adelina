@@ -22,7 +22,6 @@ server.use((err: AuxError, req: Request, res: Response, next: NextFunction) => {
     res.status(err.statusCode).json({ message: err.message });
 });
 
-console.log("Antes de inicializar el servidor...");
 AppDataSource.initialize()
     .then(() => {
         console.log("Database connection successful");
@@ -31,7 +30,7 @@ AppDataSource.initialize()
         });
     })
     .catch((error) => {
-        console.log("Database connection failed:", error);
+        console.error("Database connection failed:", error);
         process.exit(1);
     });
 export default server;

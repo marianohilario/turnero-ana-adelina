@@ -20,7 +20,7 @@ const Appointments = () => {
 
     useEffect(() => {
         axios
-            .get(`http://localhost:3000/appointments/user/${user.id}`)
+            .get(`https://turnero-ana-adelina.onrender.com/appointments/user/${user.id}`)
             .then((response) => {
                 if (response.status !== 200) {
                     throw new Error(
