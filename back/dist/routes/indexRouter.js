@@ -10,7 +10,7 @@ const servicesRouter_1 = __importDefault(require("./servicesRouter"));
 const mailsRouter_1 = __importDefault(require("./mailsRouter"));
 const indexRouter = (0, express_1.Router)();
 indexRouter.get("/", (req, res) => {
-    res.send("Hello World!");
+    res.send("Hello to Ana Adelina server!");
 });
 indexRouter.use("/users", usersRouter_1.default);
 indexRouter.use("/appointments", appointmentsRouter_1.default);

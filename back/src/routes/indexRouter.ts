@@ -7,7 +7,7 @@ import mailsRouter from "./mailsRouter";
 const indexRouter: Router = Router();
 
 indexRouter.get("/", (req, res) => {
-    res.send("Hello World!");
+    res.send("Hello to Ana Adelina server!");
 });
 indexRouter.use("/users", usersRouter);
 indexRouter.use("/appointments", appointmentsRouter);
