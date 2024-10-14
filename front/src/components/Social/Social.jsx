@@ -1,7 +1,7 @@
 import styles from "./Social.module.css";
-const Social = () => {
+const Social = ({ variant }) => {
     return (
-        <div className={styles.social}>
+        <div className={`${styles.social} ${styles[variant]}`}>
             <a
                 href="https://wa.me/5491155720653?text=Hola%2C%20estoy%20interesado%20en%20tus%20servicios"
                 target="_blank"

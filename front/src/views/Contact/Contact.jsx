@@ -92,7 +92,7 @@ const Contact = () => {
                     <button>Enviar</button>
                 </form>
             </div>
-            <Social />
+            <Social variant="contact" />
         </section>
     );
 };

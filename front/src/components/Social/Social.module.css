@@ -55,10 +55,40 @@
     }
 }
 
-@media (max-width: 900px) {
+.social.contact {
+    bottom: 1%;
+    right: 2rem;
+}
+
+@media screen and (max-width: 1080px) {
+    .social.contact {
+        flex-direction: column;
+        bottom: 50%;
+        transform: translateY(50%);
+    }
+}
+
+@media screen and (max-width: 900px) {
     .social {
         bottom: 5%;
         right: 50%;
         transform: translateX(50%);
     }
 }
+
+@media screen and (max-width: 500px) {
+    .social.contact {
+        position: relative;
+        transform: none;
+        bottom: 0;
+        left: 0;
+        right: 0;
+        flex-direction: row;
+    }
+}
+
+/* @media (min-height: 650px) {
+    .social.contact {
+        top: 0px;
+    }
+} */

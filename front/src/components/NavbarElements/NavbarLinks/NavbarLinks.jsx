@@ -6,6 +6,10 @@ import Profile from "../../Profile/Profile";
 const NavbarLinks = () => {
     const user = useSelector((state) => state.user);
     const location = useLocation();
+    const handleLinkClick = () => {
+        const ToggleBtn = document.getElementById("menuToggle");
+        ToggleBtn.checked = false;
+    };
     return (
         <div className={styles.navbarLinksContainer}>
             <input
@@ -41,30 +45,48 @@ const NavbarLinks = () => {
             <div className={styles.navbarLinks}>
                 <ul className={styles.navbarLeft}>
                     <li>
-                        <Link to={"/"}>Inicio</Link>
+                        <Link to={"/"} onClick={handleLinkClick}>
+                            Inicio
+                        </Link>
                     </li>
                     <li>
-                        <Link to={"/services"}>Servicios</Link>
+                        <Link to={"/services"} onClick={handleLinkClick}>
+                            Servicios
+                        </Link>
                     </li>
                     {user.user !== null && (
                         <li>
-                            <Link to={"/appointments"}>Mis Turnos</Link>
+                            <Link
+                                to={"/appointments"}
+                                onClick={handleLinkClick}
+                            >
+                                Mis Turnos
+                            </Link>
                         </li>
                     )}
                     <li>
-                        <Link to={"/contact"}>Contacto</Link>
+                        <Link to={"/contact"} onClick={handleLinkClick}>
+                            Contacto
+                        </Link>
                     </li>
                 </ul>
                 {!user.name && (
                     <ul className={styles.navbarRight}>
                         {location.pathname !== "/register" && (
                             <li>
-                                <Link to={"/register"}>Registrate</Link>
+                                <Link
+                                    to={"/register"}
+                                    onClick={handleLinkClick}
+                                >
+                                    Registrate
+                                </Link>
                             </li>
                         )}
                         {location.pathname !== "/login" && (
                             <li>
-                                <Link to={"/login"}>Login</Link>
+                                <Link to={"/login"} onClick={handleLinkClick}>
+                                    Login
+                                </Link>
                             </li>
                         )}
                     </ul>

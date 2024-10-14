@@ -3,7 +3,9 @@
 }
 
 .navbarLogo img {
-    height: 80px;
+    max-height: 80px;
+    min-height: 50px;
+    height: 10vw;
 }
 
 @media (max-width: 767px) {

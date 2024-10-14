@@ -19,14 +19,15 @@
 
 .contactInfo {
     position: absolute;
-    top: 12%;
-    left: 40%;
+    top: 20%;
+    right: 3%;
     text-align: end;
     z-index: 1;
 }
 
 .contactInfo img {
-    max-width: 400px;
+    max-height: 110px;
+    height: 6dvw;
 }
 
 .contactInfo h2 {
@@ -35,7 +36,7 @@
 
 .formContainer {
     position: absolute;
-    top: 30%;
+    top: 22%;
     left: 40%;
     width: 30%;
     min-width: 350px;
@@ -155,22 +156,18 @@
     }
 }
 
-@media (max-width: 1080px) {
-    .contactContainer::before {
-        content: "";
-        position: absolute;
-        top: 0;
-        left: 0;
-        width: 100%;
-        height: 100%;
-        background: url(/home.png) no-repeat right/cover,
-            linear-gradient(-90deg, #e25c7f 0%, #e25c7f 40%, #ff92b4 100%);
-        background-position: 100% 100%;
-        transform: scaleX(-1);
+@media screen and (max-width: 1080px) {
+    .contactInfo {
+        display: none;
     }
 }
 
-@media (max-width: 900px) {
+@media screen and (max-width: 900px) {
+    .contactContainer::before {
+        background-position-x: -10dvw;
+        background-position-y: calc(100% + 5vw);
+    }
+
     .contactContainer::after {
         content: "";
         position: absolute;
@@ -183,9 +180,15 @@
         right: 0;
         padding-right: 5%;
     }
+
+    .formContainer {
+        left: 50%;
+        transform: translateX(-50%);
+        top: max(100px, 22%);
+    }
 }
 
-@media (max-width: 768px) {
+@media screen and (max-width: 768px) {
     .contactInfo {
         top: max(15%, 130px);
         right: 0;
@@ -202,15 +205,40 @@
         margin-top: 0rem;
         font-size: 1.5em;
     }
+}
 
-    @media (max-width: 650px) {
-        .contactInfo img {
-            width: 95%;
-        }
+@media screen and (max-width: 650px) {
+    .contactInfo img {
+        width: 95%;
+    }
 
-        .contactInfo h2 {
-            margin-top: 0rem;
-            font-size: 1.25em;
-        }
+    .contactInfo h2 {
+        margin-top: 0rem;
+        font-size: 1.25em;
     }
 }
+
+@media screen and (max-width: 500px) {
+    .contactContainer {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: space-between;
+        gap: 20px;
+        padding-top: 100px;
+    }
+
+    .formContainer {
+        position: relative;
+        top: 0;
+        left: 0;
+        transform: none;
+        box-shadow: none;
+    }
+}
+
+/* @media (min-height: 650px) {
+    .formContainer {
+        top: 350px;
+    }
+} */

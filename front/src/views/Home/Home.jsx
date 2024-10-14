@@ -20,7 +20,7 @@ const Home = () => {
                     onClick={handleOnClic}
                 />
             </div>
-            <Social />
+            <Social variant="home" />
         </section>
     );
 };

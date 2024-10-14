@@ -8,7 +8,7 @@
 }
 
 .left {
-    width: 240px;
+    width: 40%;
 }
 
 .left img {
@@ -16,9 +16,13 @@
 }
 
 .rigth {
-    width: 300px;
+    width: 60%;
     padding-left: 30px;
     padding-top: 20px;
+    color: #fff;
+    letter-spacing: 1px;
+    text-shadow: 0 0 10px rgba(0, 0, 0, 0.6);
+    text-wrap: balance;
 }
 
 .body {
@@ -28,6 +32,7 @@
 .description {
     height: 75%;
     text-align: start;
+    text-wrap: balance;
 }
 
 .details {
@@ -36,4 +41,6 @@
     flex-direction: column;
     justify-content: space-between;
     align-items: start;
+    font-weight: 600;
+    font-size: 1.1rem;
 }
