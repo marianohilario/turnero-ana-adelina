@@ -153,20 +153,32 @@
     background: #ff92b4;
 }
 
-@media (max-width: 1024px) {
+@media screen and (max-width: 1024px) {
     .appointmentsTable tbody tr td:last-child {
         width: 100px;
     }
 }
 
-@media (max-width: 820px) {
+@media screen and (max-width: 1080px) {
+    .appointmentsHeader {
+        width: 90%;
+    }
+}
+
+@media screen and (max-width: 900px) {
+    .appointmentsContainer::before {
+        background-image: none;
+    }
+}
+
+@media screen and (max-width: 820px) {
     .appointmentsTableContainer {
         width: 90%;
         /* overflow-x: hidden; */
     }
 }
 
-@media (max-width: 800px) {
+@media screen and (max-width: 800px) {
     .appointmentsTableContainer {
         width: 95%;
         overflow-x: auto;

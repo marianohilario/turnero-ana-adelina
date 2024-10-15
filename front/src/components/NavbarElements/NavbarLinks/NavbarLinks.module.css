@@ -59,10 +59,11 @@
     cursor: pointer;
     display: none;
 }
-@media (max-width: 900px) {
+@media screen and (max-width: 900px) {
     .navbarLinksContainer {
         position: relative;
         width: 75%;
+        padding-top: 0;
     }
 
     .burgerLabel {
@@ -111,12 +112,12 @@
         transform: translateX(0);
         z-index: 1;
         position: absolute;
-        top: -2rem;
-        right: 2rem;
+        top: 0rem;
+        right: 1rem;
     }
 }
 
-@media (max-width: 767px) {
+@media screen and (max-width: 767px) {
     .navbarLinksContainer {
         text-align: end;
     }

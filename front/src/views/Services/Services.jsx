@@ -38,6 +38,8 @@ const Services = () => {
                     globalServices.map((service) => (
                         <div key={service.id} className={styles.row}>
                             <Card
+                                index={service.id}
+                                title={service.title}
                                 description={service.description}
                                 duration={service.duration}
                                 price={service.price}

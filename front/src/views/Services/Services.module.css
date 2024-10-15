@@ -19,7 +19,8 @@
     background-position: right bottom;
     background-size: contain;
     transform: scalex(-1);
-    opacity: 0.9;
+    opacity: 1;
+    filter: brightness(1.5) saturate(0.6) contrast(0.8);
     z-index: -1;
 }
 
@@ -49,4 +50,10 @@
 
 .row:nth-child(even) {
     justify-content: start;
+}
+
+@media screen and (max-width: 720px) {
+    .cardContainer {
+        margin-inline: 20px;
+    }
 }

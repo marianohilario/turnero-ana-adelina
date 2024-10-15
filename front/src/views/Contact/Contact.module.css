@@ -237,7 +237,7 @@
     }
 }
 
-/* @media (min-height: 650px) {
+/* @media screen and (min-height: 650px) {
     .formContainer {
         top: 350px;
     }

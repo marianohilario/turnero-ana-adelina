@@ -1,5 +1,6 @@
 .navbarLogo {
     margin-left: 4rem;
+    position: relative;
 }
 
 .navbarLogo img {
@@ -8,7 +9,7 @@
     height: 10vw;
 }
 
-@media (max-width: 767px) {
+@media screen and (max-width: 767px) {
     .navbarLogo {
         margin-left: 1rem;
     }

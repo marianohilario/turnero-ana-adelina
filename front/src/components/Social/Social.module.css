@@ -87,7 +87,7 @@
     }
 }
 
-/* @media (min-height: 650px) {
+/* @media screen and (min-height: 650px) {
     .social.contact {
         top: 0px;
     }

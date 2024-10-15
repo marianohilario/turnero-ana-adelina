@@ -442,3 +442,45 @@
         transform: rotate(360deg);
     }
 }
+
+@media screen and (max-width: 1200px) {
+    /* .container {
+        width: 95%;
+    } */
+
+    .calendarContainer {
+        width: min(300px, 95vw);
+    }
+
+    .day {
+        height: calc(250px * 0.1428);
+    }
+}
+
+@media screen and (max-width: 1080px) {
+    .container {
+        width: 90%;
+    }
+}
+
+@media screen and (max-width: 900px) {
+    .container {
+        flex-direction: column;
+        align-items: center;
+        gap: 20px;
+    }
+
+    .left {
+        width: 100%;
+    }
+
+    .right {
+        width: 100%;
+        min-height: 250px;
+    }
+
+    .bottomSpacing {
+        width: 100%;
+        min-height: 10px;
+    }
+}

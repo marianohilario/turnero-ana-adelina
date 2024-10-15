@@ -22,7 +22,6 @@ server.use((err, req, res, next) => {
     err.message = err.message || "An unexpected error occurred";
     res.status(err.statusCode).json({ message: err.message });
 });
-console.log("Antes de inicializar el servidor...");
 data_source_1.AppDataSource.initialize()
     .then(() => {
     console.log("Database connection successful");
@@ -31,7 +30,7 @@ data_source_1.AppDataSource.initialize()
     });
 })
     .catch((error) => {
-    console.log("Database connection failed:", error);
+    console.error("Database connection failed:", error);
     process.exit(1);
 });
 exports.default = server;

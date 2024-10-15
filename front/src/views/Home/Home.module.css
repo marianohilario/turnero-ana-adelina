@@ -82,14 +82,14 @@
     color: #fff;
 }
 
-@media (max-width: 1080px) {
+@media screen and (max-width: 1080px) {
     .homeContainer::before {
         background: url(/home.png) no-repeat right/cover,
             linear-gradient(-90deg, #e25c7f 0%, #e25c7f 40%, #ff92b4 100%);
     }
 }
 
-@media (max-width: 900px) {
+@media screen and (max-width: 900px) {
     /* .homeContainer::after {
         content: "";
         position: absolute;
@@ -108,7 +108,7 @@
     }
 }
 
-@media (max-width: 768px) {
+@media screen and (max-width: 768px) {
     .homeInfo {
         top: max(15%, 130px);
         right: 0;
@@ -126,7 +126,7 @@
     }
 }
 
-@media (max-width: 650px) {
+@media screen and (max-width: 650px) {
     .homeInfo img {
         width: 95%;
     }

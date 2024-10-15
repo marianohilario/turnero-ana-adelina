@@ -280,6 +280,7 @@ const Calendar = () => {
                     </div>
                 )}
             </div>
+            <div className={styles.bottomSpacing}></div>
         </div>
     );
 };
