@@ -19,8 +19,9 @@
 
 .contactInfo {
     position: absolute;
-    top: 20%;
-    right: 3%;
+    top: 100px;
+    left: 40%;
+    /* transform: translateX(50%); */
     text-align: end;
     z-index: 1;
 }
@@ -36,7 +37,7 @@
 
 .formContainer {
     position: absolute;
-    top: 22%;
+    top: 30%;
     left: 40%;
     width: 30%;
     min-width: 350px;
@@ -160,25 +161,16 @@
     .contactInfo {
         display: none;
     }
+
+    .formContainer {
+        top: 150px;
+    }
 }
 
 @media screen and (max-width: 900px) {
     .contactContainer::before {
         background-position-x: -10dvw;
         background-position-y: calc(100% + 5vw);
-    }
-
-    .contactContainer::after {
-        content: "";
-        position: absolute;
-        background-color: rgba(0, 0, 0, 0.3);
-        inset: 0 0 0 0;
-    }
-
-    .contactInfo {
-        top: max(15%, 130px);
-        right: 0;
-        padding-right: 5%;
     }
 
     .formContainer {
@@ -236,9 +228,3 @@
         box-shadow: none;
     }
 }
-
-/* @media screen and (min-height: 650px) {
-    .formContainer {
-        top: 350px;
-    }
-} */
