@@ -7,7 +7,7 @@ import { toast } from "react-toastify";
 import Swal from "sweetalert2";
 import withReactContent from "sweetalert2-react-content";
 import styles from "../Calendar/Calendar.module.css";
-
+const url = import.meta.env.VITE_URL_BACK;
 const MySwal = withReactContent(Swal);
 
 const EventDetails = ({
@@ -20,7 +20,7 @@ const EventDetails = ({
 
     const fetchCancelAppointment = async (id) => {
         try {
-            await axios.put(`https://turnero-ana-adelina.onrender.com/appointments/cancel/${id}`);
+            await axios.put(`${url}/appointments/cancel/${id}`);
             dispatch(cancelAppointment(id));
             toast.success("Cita cancelada exitosamente.");
         } catch (error) {
@@ -41,7 +41,7 @@ const EventDetails = ({
         };
         try {
             const response = await axios.post(
-                "https://turnero-ana-adelina.onrender.com/mails/cancelappointment",
+                `${url}/mails/cancelappointment`,
                 dataToSend
             );
             if (response.status === 200) {

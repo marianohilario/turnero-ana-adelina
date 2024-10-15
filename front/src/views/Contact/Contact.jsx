@@ -4,6 +4,7 @@ import styles from "./Contact.module.css";
 import { useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
 import axios from "axios";
+const url = import.meta.env.VITE_URL_BACK;
 const Contact = () => {
     const navigate = useNavigate();
 
@@ -29,7 +30,7 @@ const Contact = () => {
             setIsLoading(true);
             try {
                 const response = await axios.post(
-                    "https://turnero-ana-adelina.onrender.com/mails",
+                    `${url}/mails`,
                     dataForm
                 );
                 if (response.status === 200) {

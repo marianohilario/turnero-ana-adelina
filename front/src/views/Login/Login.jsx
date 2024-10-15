@@ -8,6 +8,7 @@ import { useDispatch } from "react-redux";
 import { setUser } from "../../redux/userSlicer";
 import { useNavigate } from "react-router-dom";
 
+const url = import.meta.env.VITE_URL_BACK;
 const Login = () => {
     const dispatch = useDispatch();
     const navigate = useNavigate();
@@ -29,7 +30,7 @@ const Login = () => {
         } else {
             try {
                 const response = await axios.post(
-                    "https://turnero-ana-adelina.onrender.com/users/login",
+                    `${url}/users/login`,
                     userData
                 );
                 if (response.status === 200) {

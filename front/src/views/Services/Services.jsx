@@ -4,14 +4,14 @@ import styles from "./Services.module.css";
 import axios from "axios";
 import { setServices } from "../../redux/serviceSlicer";
 import Card from "../../components/Card/Card";
-
+const url = import.meta.env.VITE_URL_BACK;
 const Services = () => {
     const globalServices = useSelector((store) => store.services);
     const dispatch = useDispatch();
     useEffect(() => {
         !globalServices.length &&
             axios
-                .get(`https://turnero-ana-adelina.onrender.com/services`)
+                .get(`${url}/services`)
                 .then((response) => {
                     if (response.status !== 200) {
                         throw new Error(

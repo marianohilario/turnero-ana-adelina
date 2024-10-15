@@ -6,7 +6,7 @@ import { serviceSlice, setServices } from "../../redux/serviceSlicer";
 import axios from "axios";
 import { toast } from "react-toastify";
 import { addAppointment } from "../../redux/userAppointmentsSlicer";
-
+const url = import.meta.env.VITE_URL_BACK;
 const AddEvent = ({
     selectedDay,
     currentMonth,
@@ -47,7 +47,7 @@ const AddEvent = ({
     useEffect(() => {
         !globalServices.length &&
             axios
-                .get(`https://turnero-ana-adelina.onrender.com/services`)
+                .get(`${url}/services`)
                 .then((response) => {
                     if (response.status !== 200) {
                         throw new Error(
@@ -119,7 +119,7 @@ const AddEvent = ({
     const scheduleAppointment = async () => {
         try {
             const response = await axios.post(
-                `https://turnero-ana-adelina.onrender.com/schedule`,
+                `${url}/appointments/schedule`,
                 appointmentData
             );
 
@@ -132,6 +132,8 @@ const AddEvent = ({
                 toast.success("Cita creada exitosamente.");
             }
         } catch (error) {
+            console.log(appointmentData);
+            console.log(response);
             console.error(
                 "There was a problem with the axios operation:",
                 error
@@ -150,7 +152,7 @@ const AddEvent = ({
         };
         try {
             const response = await axios.post(
-                "https://turnero-ana-adelina.onrender.com/mails/confirmappointment",
+                `${url}/mails/confirmappointment`,
                 dataToSend
             );
             if (response.status === 200) {

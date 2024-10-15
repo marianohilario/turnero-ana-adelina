@@ -4,7 +4,7 @@ import axios from "axios";
 import Calendar from "../../components/Calendar/Calendar";
 import { useSelector, useDispatch } from "react-redux";
 import { setUserAppointments } from "../../redux/userAppointmentsSlicer";
-
+const url = import.meta.env.VITE_URL_BACK;
 const AppointmentsHeader = () => (
     <div className={styles.appointmentsHeader}>
         <div className={styles.appointmentsTitle}>
@@ -21,7 +21,7 @@ const Appointments = () => {
     useEffect(() => {
         axios
             .get(
-                `https://turnero-ana-adelina.onrender.com/appointments/user/${user.id}`
+                `${url}/appointments/user/${user.id}`
             )
             .then((response) => {
                 if (response.status !== 200) {

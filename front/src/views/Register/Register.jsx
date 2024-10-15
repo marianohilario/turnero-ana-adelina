@@ -6,8 +6,7 @@ import { validation } from "../../helpers/registerFormValidation";
 import axios from "axios";
 import { toast } from "react-toastify";
 import { useNavigate } from "react-router-dom";
-import Swal from "sweetalert2";
-
+const url = import.meta.env.VITE_URL_BACK;
 const Register = () => {
     const [userData, setUserData] = useState({
         name: "",
@@ -33,9 +32,7 @@ const Register = () => {
     useEffect(() => {
         const fetchUsers = async () => {
             try {
-                const response = await axios.get(
-                    "https://turnero-ana-adelina.onrender.com/users/profiles"
-                );
+                const response = await axios.get(`${url}/users/profiles`);
                 if (response.status !== 200) {
                     throw new Error(
                         "Network response was not ok " + response.statusText
@@ -94,7 +91,7 @@ const Register = () => {
                 const dataToSend = { ...userData };
                 delete dataToSend.password2;
                 const response = await axios.post(
-                    "https://turnero-ana-adelina.onrender.com/users/register",
+                    `${url}/users/register`,
                     dataToSend
                 );
                 if (response.status === 201) {
