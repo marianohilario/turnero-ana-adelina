@@ -106,7 +106,7 @@ const EventDetails = ({
                         <div key={event.id} className={styles.event}>
                             <div className={styles.eventTime}>
                                 <i className="fas fa-circle active"></i>
-                                <p>{event.time.slice(0, 5)} hs</p>
+                                <p>{event.time.slice(0, 5)}hs</p>
                             </div>
                             <p className={styles.eventTitle}>
                                 {event.service.title}
@@ -127,7 +127,8 @@ const EventDetails = ({
                             {event.status === "active" &&
                             validateTime(event.date, event.time, 24) ? (
                                 <CustomButton
-                                    text={"Cancelar"}
+                                    // text={"Cancelar"}
+                                    text={<i className="far fa-trash-alt"></i>}
                                     className={styles.cancelBtn}
                                     onClick={() => handleCancellBtn(event.id)}
                                 />

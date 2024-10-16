@@ -44,6 +44,7 @@
 .events {
     width: 100%;
     display: flex;
+    flex: 1;
     flex-direction: column;
     overflow-x: hidden;
     overflow-y: auto;
@@ -51,9 +52,10 @@
 
 .events .event {
     width: 100%;
-    min-height: 50px;
+    min-height: 88px;
     display: grid;
-    grid-template-columns: 1fr 3fr 1fr 107px;
+    grid-template-columns: 1.5fr 3fr 0.75fr 0.75fr;
+    gap: 15px;
     justify-items: start;
     align-items: center;
     text-align: start;
@@ -96,6 +98,7 @@
     width: 18px;
     text-align: center;
     border-radius: 50%;
+    margin-inline: auto;
 }
 
 .cancelBtn {
@@ -104,11 +107,12 @@
     text-transform: uppercase;
     letter-spacing: 1px;
     font-weight: 600;
-    padding: 5px 10px;
+    padding: 5px 7px;
     border: 2px solid #fff;
     border-radius: 20px;
     cursor: pointer;
     transition: 0.3s ease;
+    margin-inline: auto;
 }
 
 .cancelBtn:hover {
@@ -249,9 +253,6 @@
 }
 
 .addEvent {
-    position: absolute;
-    bottom: 30px;
-    right: 30px;
     width: 40px;
     height: 40px;
     align-content: center;
@@ -261,6 +262,7 @@
     opacity: 0.5;
     cursor: pointer;
     transition: 0.3s ease;
+    margin: 1rem 1rem 1rem auto;
 }
 
 .addEvent:hover {
@@ -476,11 +478,21 @@
 
     .right {
         width: 100%;
-        min-height: 250px;
     }
 
     .bottomSpacing {
         width: 100%;
         min-height: 10px;
+    }
+
+    .events .event {
+        padding: 20px 10px;
+        font-size: 1em;
+    }
+}
+
+@media screen and (max-width: 500px) {
+    .todayDate {
+        flex-direction: column;
     }
 }
