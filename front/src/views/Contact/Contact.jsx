@@ -90,7 +90,9 @@ const Contact = () => {
                         rows="10"
                         onChange={handleInputChange}
                     ></textarea>
-                    <button>Enviar</button>
+                    <button disabled={isLoading}>
+                        {isLoading ? "Enviando..." : "Enviar"}
+                    </button>
                 </form>
             </div>
             <Social variant="contact" />

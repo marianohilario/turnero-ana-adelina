@@ -21,6 +21,7 @@ const Register = () => {
 
     const [errors, setErrors] = useState({});
     const [users, setUsers] = useState([]);
+    const [isSubmitting, setIsSubmitting] = useState(false);
     const [loading, setLoading] = useState({
         username: false,
         nDni: false,
@@ -87,6 +88,7 @@ const Register = () => {
         e.preventDefault();
         const values = Object.values(errors);
         if (values.every((value) => value === undefined)) {
+            setIsSubmitting(true);
             try {
                 const dataToSend = { ...userData };
                 delete dataToSend.password2;
@@ -113,6 +115,8 @@ const Register = () => {
                 }
             } catch (error) {
                 toast.error("Error al registrarse.");
+            } finally {
+                setIsSubmitting(false);
             }
         } else {
             toast.warning(
@@ -231,14 +235,11 @@ const Register = () => {
 
                         <div></div>
                         <CustomButton
-                            text={"Registrarse"}
+                            text={isSubmitting ? "Registrando..." : "Registrarse"}
                             className={styles.registerBtn}
                             disabled={
-                                Object.values(userData).some(
-                                    (value) => value === ""
-                                )
-                                    ? true
-                                    : false
+                                isSubmitting ||
+                                Object.values(userData).some((value) => value === "")
                             }
                         />
                     </form>

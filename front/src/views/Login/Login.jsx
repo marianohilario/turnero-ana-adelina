@@ -17,6 +17,7 @@ const Login = () => {
         username: "",
         password: "",
     });
+    const [isLoading, setIsLoading] = useState(false);
 
     const handleChange = (e) => {
         const { name, value } = e.target;
@@ -28,6 +29,7 @@ const Login = () => {
         if (userData.username === "" || userData.password === "") {
             toast.warning("Debes completar todos los campos para continuar.");
         } else {
+            setIsLoading(true);
             try {
                 const response = await axios.post(
                     `${url}/users/login`,
@@ -50,6 +52,8 @@ const Login = () => {
                 }
             } catch (error) {
                 toast.error("Error en el login.");
+            } finally {
+                setIsLoading(false);
             }
         }
     };
@@ -92,13 +96,12 @@ const Login = () => {
                         />
 
                         <CustomButton
-                            text={"Login"}
+                            text={isLoading ? "Ingresando..." : "Login"}
                             className={styles.loginBtn}
                             disabled={
+                                isLoading ||
                                 userData.username === "" ||
                                 userData.password === ""
-                                    ? true
-                                    : false
                             }
                         />
                     </form>
