@@ -58,6 +58,11 @@ const Contact = () => {
                 <h2>Belleza y Spa</h2>
             </div>
             <div className={styles.formContainer}>
+                <p className={styles.eyebrow}>Contacto</p>
+                <h3 className={styles.formTitle}>¿Tenés alguna consulta?</h3>
+                <div className={styles.titleDivider}>
+                    <span className={styles.diamond}></span>
+                </div>
                 {isLoading && <div className={styles.loader}></div>}
                 <form
                     action=""
