@@ -28,7 +28,46 @@
 }
 
 .homeInfo h2 {
-    margin-top: 1rem;
+    font-family: "Cormorant Garamond", serif;
+    font-size: clamp(2rem, 4vw, 3.5rem);
+    font-weight: 500;
+    font-style: italic;
+    margin-top: 0.3rem;
+    line-height: 1;
+}
+
+.eyebrow {
+    font-size: 0.65rem;
+    letter-spacing: 4px;
+    text-transform: uppercase;
+    color: rgba(255, 255, 255, 0.7);
+    font-weight: 400;
+    margin-top: 0.8rem;
+    margin-bottom: 0.2rem;
+}
+
+.titleDivider {
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    gap: 10px;
+    margin-top: 0.6rem;
+    margin-bottom: 0.6rem;
+}
+
+.titleDivider::before {
+    content: "";
+    width: 44px;
+    height: 1px;
+    background: rgba(255, 255, 255, 0.45);
+}
+
+.diamond {
+    width: 5px;
+    height: 5px;
+    background: rgba(255, 255, 255, 0.8);
+    transform: rotate(45deg);
+    flex-shrink: 0;
 }
 
 .appointmentBtn {

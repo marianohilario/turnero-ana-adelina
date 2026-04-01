@@ -13,7 +13,11 @@ const Home = () => {
         <section className={styles.homeContainer}>
             <div className={styles.homeInfo}>
                 <img src="./AnaAdelinaText.png" alt="" />
+                <p className={styles.eyebrow}>Centro de Belleza &amp; Bienestar</p>
                 <h2>Belleza y Spa</h2>
+                <div className={styles.titleDivider}>
+                    <span className={styles.diamond}></span>
+                </div>
                 <CustomButton
                     className={styles.appointmentBtn}
                     text={"Agendar Cita"}
