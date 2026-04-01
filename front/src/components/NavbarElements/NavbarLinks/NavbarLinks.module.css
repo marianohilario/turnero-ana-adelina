@@ -38,8 +38,13 @@
     transition: transform 0.3s ease;
 }
 
-.navbarLinks li a:hover::before {
+.navbarLinks li a:hover::before,
+.navbarLinks li .activeLink::before {
     transform: scaleX(1);
+}
+
+.activeLink {
+    font-weight: 700;
 }
 
 .navbarLeft,

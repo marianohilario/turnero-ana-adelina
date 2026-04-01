@@ -1,5 +1,5 @@
 import styles from "./NavbarLinks.module.css";
-import { Link, useLocation } from "react-router-dom";
+import { NavLink, useLocation } from "react-router-dom";
 import { useSelector } from "react-redux";
 import Profile from "../../Profile/Profile";
 
@@ -45,48 +45,79 @@ const NavbarLinks = () => {
             <div className={styles.navbarLinks}>
                 <ul className={styles.navbarLeft}>
                     <li>
-                        <Link to={"/"} onClick={handleLinkClick}>
+                        <NavLink
+                            to={"/"}
+                            end
+                            className={({ isActive }) =>
+                                isActive ? styles.activeLink : ""
+                            }
+                            onClick={handleLinkClick}
+                        >
                             Inicio
-                        </Link>
+                        </NavLink>
                     </li>
                     <li>
-                        <Link to={"/services"} onClick={handleLinkClick}>
+                        <NavLink
+                            to={"/services"}
+                            className={({ isActive }) =>
+                                isActive ? styles.activeLink : ""
+                            }
+                            onClick={handleLinkClick}
+                        >
                             Servicios
-                        </Link>
+                        </NavLink>
                     </li>
                     {user.user !== null && (
                         <li>
-                            <Link
+                            <NavLink
                                 to={"/appointments"}
+                                className={({ isActive }) =>
+                                    isActive ? styles.activeLink : ""
+                                }
                                 onClick={handleLinkClick}
                             >
                                 Mis Turnos
-                            </Link>
+                            </NavLink>
                         </li>
                     )}
                     <li>
-                        <Link to={"/contact"} onClick={handleLinkClick}>
+                        <NavLink
+                            to={"/contact"}
+                            className={({ isActive }) =>
+                                isActive ? styles.activeLink : ""
+                            }
+                            onClick={handleLinkClick}
+                        >
                             Contacto
-                        </Link>
+                        </NavLink>
                     </li>
                 </ul>
                 {!user.name && (
                     <ul className={styles.navbarRight}>
                         {location.pathname !== "/register" && (
                             <li>
-                                <Link
+                                <NavLink
                                     to={"/register"}
+                                    className={({ isActive }) =>
+                                        isActive ? styles.activeLink : ""
+                                    }
                                     onClick={handleLinkClick}
                                 >
                                     Registrate
-                                </Link>
+                                </NavLink>
                             </li>
                         )}
                         {location.pathname !== "/login" && (
                             <li>
-                                <Link to={"/login"} onClick={handleLinkClick}>
+                                <NavLink
+                                    to={"/login"}
+                                    className={({ isActive }) =>
+                                        isActive ? styles.activeLink : ""
+                                    }
+                                    onClick={handleLinkClick}
+                                >
                                     Login
-                                </Link>
+                                </NavLink>
                             </li>
                         )}
                     </ul>

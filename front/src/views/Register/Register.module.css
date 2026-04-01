@@ -11,8 +11,12 @@
     display: grid;
     grid-template-columns: 1fr 2fr;
     padding: 40px;
-    box-shadow: 5px 5px 20px rgba(0, 0, 0, 0.3);
-    border-radius: 10px;
+    border-radius: 16px;
+    background: rgba(255, 255, 255, 0.15);
+    backdrop-filter: blur(14px);
+    -webkit-backdrop-filter: blur(14px);
+    border: 1px solid rgba(255, 255, 255, 0.3);
+    box-shadow: 0 8px 32px rgba(226, 92, 127, 0.25);
 }
 
 .registerFormContainer {
