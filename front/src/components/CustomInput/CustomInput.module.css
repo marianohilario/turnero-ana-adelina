@@ -42,6 +42,15 @@
     color: #ccc;
 }
 
+/* Date input: highlight focused part in pink/white instead of browser blue/gray */
+.input[type="date"]::-webkit-datetime-edit-day-field:focus,
+.input[type="date"]::-webkit-datetime-edit-month-field:focus,
+.input[type="date"]::-webkit-datetime-edit-year-field:focus {
+    background-color: #e25c7f;
+    color: #fff;
+    border-radius: 2px;
+}
+
 .icon {
     position: absolute;
     left: 10px;
