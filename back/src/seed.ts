@@ -24,18 +24,18 @@ const servicesData = [
         img: "/manicurePREMIUM.png",
     },
     {
-        title: "Pedicura Básica",
+        title: "Pedicure Básica",
         description: "Limado, cutícula, tratamiento de callosidades y esmaltado tradicional.",
         duration: "00:45:00",
         price: 4500,
-        img: "/PedicuraBASIC.png",
+        img: "/PedicureBASIC.png",
     },
     {
-        title: "Pedicura Premium",
+        title: "Pedicure Premium",
         description: "Pedicura completa con exfoliación, masaje relajante e hidratación profunda.",
         duration: "01:15:00",
         price: 7500,
-        img: "/PedicuraPREMIUM.png",
+        img: "/PedicurePREMIUM.png",
     },
     {
         title: "Podoestetica",
