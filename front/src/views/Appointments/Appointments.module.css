@@ -32,15 +32,47 @@
 }
 .appointmentsTitle {
     display: flex;
-    align-items: center;
+    flex-direction: column;
+    align-items: flex-start;
 }
 
-.appointmentsTitle img {
-    height: 40px;
-    margin-right: 0.5rem;
+.eyebrow {
+    font-size: 0.65rem;
+    letter-spacing: 4px;
+    text-transform: uppercase;
+    color: rgba(255, 255, 255, 0.65);
+    font-weight: 400;
+    margin-bottom: 0.3rem;
 }
+
 .appointmentsTitle h1 {
-    font-size: 44px;
+    font-family: "Cormorant Garamond", serif;
+    font-style: italic;
+    font-size: clamp(2.5rem, 5vw, 3.8rem);
+    font-weight: 500;
+    line-height: 1;
+}
+
+.titleDivider {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-top: 0.5rem;
+}
+
+.titleDivider::after {
+    content: "";
+    width: 44px;
+    height: 1px;
+    background: rgba(255, 255, 255, 0.45);
+}
+
+.diamond {
+    width: 5px;
+    height: 5px;
+    background: rgba(255, 255, 255, 0.8);
+    transform: rotate(45deg);
+    flex-shrink: 0;
 }
 
 .appointmentBtn {

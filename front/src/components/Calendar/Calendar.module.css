@@ -16,9 +16,9 @@
     align-items: start;
     flex-direction: column;
     background-color: #e25c7f;
-    border-radius: 5px;
+    border-radius: 16px;
     position: relative;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
+    box-shadow: 0 8px 32px rgba(226, 92, 127, 0.35);
 }
 
 .todayDate {
@@ -133,7 +133,7 @@
     width: 95%;
     height: 0;
     overflow: hidden;
-    border-radius: 5px;
+    border-radius: 12px;
     background-color: #fff;
     color: #e25c7f;
     box-shadow: 0 0 10px rgba(195, 195, 195, 0.9);
@@ -280,9 +280,10 @@
     z-index: 1;
     background-color: #fff;
     color: #e25c7f;
-    border-radius: 5px;
+    border-radius: 16px;
     padding: 5px;
     width: min(363px, 95vw);
+    box-shadow: 0 8px 32px rgba(226, 92, 127, 0.2);
 }
 
 .headerContainer {

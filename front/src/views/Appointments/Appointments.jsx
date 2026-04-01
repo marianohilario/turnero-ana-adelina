@@ -8,8 +8,11 @@ const url = import.meta.env.VITE_URL_BACK;
 const AppointmentsHeader = () => (
     <div className={styles.appointmentsHeader}>
         <div className={styles.appointmentsTitle}>
-            <img src="./calendar.png" alt="" />
-            <h1>Turnos</h1>
+            <p className={styles.eyebrow}>Mi Agenda</p>
+            <h1>Mis Turnos</h1>
+            <div className={styles.titleDivider}>
+                <span className={styles.diamond}></span>
+            </div>
         </div>
     </div>
 );
