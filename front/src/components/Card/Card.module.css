@@ -1,117 +1,127 @@
 .card {
+    background: #fff;
+    border-radius: 16px;
+    overflow: hidden;
+    box-shadow: 0 2px 18px rgba(226, 92, 127, 0.13);
     display: flex;
-    background: linear-gradient(90deg, #fbc2d4 10%, #ff6d9b 90%);
-    color: #222;
-    padding: 20px;
-    width: 60%;
-    border-radius: 14px;
-    box-shadow: 0 4px 18px rgba(226, 92, 127, 0.22);
-    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    flex-direction: column;
+    transition: transform 0.4s cubic-bezier(0.34, 1.56, 0.64, 1),
+        box-shadow 0.4s ease;
 }
 
 .card:hover {
-    transform: translateY(-5px);
-    box-shadow: 0 12px 32px rgba(226, 92, 127, 0.38);
+    transform: translateY(-9px);
+    box-shadow: 0 20px 44px rgba(226, 92, 127, 0.28);
 }
 
-.left {
-    width: 40%;
+/* ── Image area ── */
+.imageWrapper {
+    position: relative;
+    height: 190px;
+    overflow: hidden;
+    background: linear-gradient(135deg, #fbc2d4, #ff92b4);
+    flex-shrink: 0;
 }
 
-.left img {
+.image {
     width: 100%;
-}
-
-.rigth {
-    width: 60%;
-    padding-left: 30px;
-    padding-top: 20px;
-    color: #fff;
-    letter-spacing: 1px;
-    text-shadow: 0 0 10px rgba(0, 0, 0, 0.6);
-    text-wrap: balance;
-}
-
-.body {
     height: 100%;
+    object-fit: cover;
+    transition: transform 0.6s ease;
+    display: block;
 }
 
-.description {
-    height: 75%;
-    text-align: start;
-    text-wrap: balance;
+.card:hover .image {
+    transform: scale(1.07);
 }
 
-.details {
-    height: 20%;
+/* gradient scrim on image bottom */
+.imageWrapper::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(
+        to top,
+        rgba(226, 92, 127, 0.4) 0%,
+        transparent 55%
+    );
+    pointer-events: none;
+}
+
+/* service number badge */
+.number {
+    position: absolute;
+    top: 12px;
+    left: 12px;
+    z-index: 1;
+    font-family: "Cormorant Garamond", serif;
+    font-size: 0.7rem;
+    font-weight: 600;
+    letter-spacing: 2px;
+    color: #fff;
+    background: rgba(226, 92, 127, 0.6);
+    backdrop-filter: blur(6px);
+    -webkit-backdrop-filter: blur(6px);
+    padding: 3px 11px;
+    border-radius: 20px;
+}
+
+/* ── Text content ── */
+.content {
+    padding: 18px 20px 20px;
     display: flex;
     flex-direction: column;
-    justify-content: space-between;
-    align-items: start;
-    font-weight: 600;
-    font-size: 1.1rem;
+    flex: 1;
+    color: inherit;
 }
 
 .title {
-    display: none;
+    font-family: "Cormorant Garamond", serif;
+    font-size: 1.5rem;
+    font-weight: 600;
+    color: #1a0a0f;
+    line-height: 1.15;
+    margin-bottom: 9px;
 }
 
-@media screen and (max-width: 900px) {
-    .card {
-        width: 100%;
-    }
-
-    .card.cardReversed {
-        flex-direction: row-reverse;
-    }
+.divider {
+    width: 28px;
+    height: 2px;
+    background: linear-gradient(to right, #e25c7f, #ff92b4);
+    border-radius: 1px;
+    margin-bottom: 11px;
+    flex-shrink: 0;
 }
 
-@media screen and (max-width: 650px) {
-    .card {
-        height: 250px;
-    }
-
-    .body {
-        display: flex;
-        flex-direction: column;
-    }
-
-    .left {
-        display: none;
-    }
-
-    .rigth {
-        width: 100%;
-        padding: 0;
-    }
-
-    .title {
-        display: block;
-        font-size: 1.3rem;
-        margin-bottom: 0.7rem;
-        padding-bottom: 0.3rem;
-        color: #7e7e7e;
-        text-shadow: 0 0 10px rgba(255, 255, 255, 0.6);
-        border-bottom: 1px solid #979797;
-    }
-
-    .description {
-        height: auto;
-        flex: 1;
-        text-wrap: wrap;
-    }
-
-    .details {
-        font-size: 1rem;
-        display: flex;
-        flex-direction: row;
-        justify-content: space-evenly;
-        align-items: center;
-    }
+.description {
+    font-size: 0.79rem;
+    color: #888;
+    line-height: 1.65;
+    flex: 1;
+    margin-bottom: 15px;
 }
 
-@media screen and (max-width: 500px) {
-    .card {
-        height: 400px;
-    }
+/* ── Footer row ── */
+.meta {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding-top: 12px;
+    border-top: 1px solid #f5e6eb;
+}
+
+.duration {
+    font-size: 0.74rem;
+    color: #bbb;
+    display: flex;
+    align-items: center;
+    gap: 5px;
+}
+
+.price {
+    font-family: "Cormorant Garamond", serif;
+    font-size: 1.3rem;
+    font-weight: 700;
+    color: #e25c7f;
+    letter-spacing: 0.3px;
 }

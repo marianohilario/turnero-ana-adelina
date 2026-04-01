@@ -31,9 +31,13 @@ const Services = () => {
     return (
         <div className={styles.servicesMainContainer}>
             <div className={styles.titleSection}>
+                <p className={styles.eyebrow}>Tratamientos &amp; Cuidados</p>
                 <h2>Nuestros Servicios</h2>
-                <p className={styles.subtitle}>Elegí el tratamiento ideal para vos</p>
+                <div className={styles.titleDivider}>
+                    <span className={styles.diamond}></span>
+                </div>
             </div>
+
             <div className={styles.cardContainer}>
                 {loading && (
                     <div className={styles.loaderWrapper}>
@@ -47,11 +51,11 @@ const Services = () => {
                     </p>
                 )}
                 {Array.isArray(globalServices) &&
-                    globalServices.map((service, index) => (
+                    globalServices.map((service, idx) => (
                         <div
                             key={service.id}
-                            className={styles.row}
-                            style={{ animationDelay: `${index * 0.08}s` }}
+                            className={styles.cardWrapper}
+                            style={{ animationDelay: `${idx * 0.07}s` }}
                         >
                             <Card
                                 index={service.id}
