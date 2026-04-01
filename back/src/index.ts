@@ -4,6 +4,7 @@ import cors from "cors";
 import { PORT } from "./config/envs";
 import { AppDataSource } from "./config/data-source";
 import indexRouter from "./routes/indexRouter";
+import { seedServices } from "./seed";
 import AuxError from "./utils/AuxiliarError";
 import path from "path";
 
@@ -23,8 +24,9 @@ server.use((err: AuxError, req: Request, res: Response, next: NextFunction) => {
 });
 
 AppDataSource.initialize()
-    .then(() => {
+    .then(async () => {
         console.log("Database connection successful");
+        await seedServices();
         server.listen(PORT, () => {
             console.log(`Server listening on port ${PORT}`);
         });
