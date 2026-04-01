@@ -1,14 +1,36 @@
-import { useState } from "react";
-import { useSelector } from "react-redux";
+import { useRef, useState } from "react";
+import { useSelector, useDispatch } from "react-redux";
+import { setUser } from "../../redux/userSlicer";
+import { setUserAppointments } from "../../redux/userAppointmentsSlicer";
 import styles from "./Profile.module.css";
 
 const Profile = () => {
-    const [avatarUrl, setAvatarUrl] = useState("avatar.jpg");
+    const dispatch = useDispatch();
     const user = useSelector((store) => store.user);
-    const [avatarDetailActive, setAvatarDetailActive] = useState(false);
+    const storageKey = `avatar_${user.id}`;
 
-    const handleAvatarDetails = () => {
-        setAvatarDetailActive((prev) => !prev);
+    const [avatarUrl, setAvatarUrl] = useState(
+        () => localStorage.getItem(storageKey) || "./avatar.jpg"
+    );
+    const [panelOpen, setPanelOpen] = useState(false);
+    const fileInputRef = useRef(null);
+
+    const handleFileChange = (e) => {
+        const file = e.target.files[0];
+        if (!file) return;
+        const reader = new FileReader();
+        reader.onload = (evt) => {
+            const dataUrl = evt.target.result;
+            setAvatarUrl(dataUrl);
+            localStorage.setItem(storageKey, dataUrl);
+        };
+        reader.readAsDataURL(file);
+    };
+
+    const handleLogout = () => {
+        dispatch(setUser({ user: null }));
+        dispatch(setUserAppointments([]));
+        setPanelOpen(false);
     };
 
     return (
@@ -17,22 +39,42 @@ const Profile = () => {
                 src={avatarUrl}
                 alt="Avatar"
                 className={styles.profileImg}
-                onClick={handleAvatarDetails}
+                onClick={() => setPanelOpen((p) => !p)}
             />
-            <div
-                className={`${styles.profileDetail} ${
-                    avatarDetailActive ? styles.active : ""
-                }`}
-            >
-                <h3>{user.name.split(" ")[0]}</h3>
-                <div className={styles.changeAvatar}>
-                    <button>Actualizar</button>
-                    <div className={styles.avatarSelect}>
-                        <input type="file" className={styles.inputSelect} />
-                        <i className="fas fa-camera" />
+            {panelOpen && (
+                <div className={styles.profileDetail}>
+                    <div className={styles.panelHeader}>
+                        <div className={styles.avatarWrapper}>
+                            <img
+                                src={avatarUrl}
+                                alt="Avatar"
+                                className={styles.panelAvatar}
+                            />
+                            <button
+                                className={styles.cameraBtn}
+                                onClick={() => fileInputRef.current.click()}
+                                title="Cambiar foto"
+                            >
+                                <i className="fas fa-camera" />
+                            </button>
+                            <input
+                                type="file"
+                                accept="image/*"
+                                ref={fileInputRef}
+                                onChange={handleFileChange}
+                                style={{ display: "none" }}
+                            />
+                        </div>
+                        <div className={styles.userInfo}>
+                            <strong>{user.name}</strong>
+                            <span>{user.email}</span>
+                        </div>
                     </div>
+                    <button className={styles.logoutBtn} onClick={handleLogout}>
+                        <i className="fas fa-sign-out-alt" /> Cerrar sesión
+                    </button>
                 </div>
-            </div>
+            )}
         </div>
     );
 };
