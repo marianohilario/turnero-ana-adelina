@@ -1,3 +1,4 @@
+import { useState } from "react";
 import axios from "axios";
 import CustomButton from "../CustomButton/CustomButton";
 import NoAppointments from "../NoAppointments/NoAppointments";
@@ -17,14 +18,18 @@ const EventDetails = ({
     appointmentsToShow,
 }) => {
     const dispatch = useDispatch();
+    const [cancellingId, setCancellingId] = useState(null);
 
     const fetchCancelAppointment = async (id) => {
+        setCancellingId(id);
         try {
             await axios.put(`${url}/appointments/cancel/${id}`);
             dispatch(cancelAppointment(id));
             toast.success("Cita cancelada exitosamente.");
         } catch (error) {
             toast.error("Hubo un problema al cancelar la cita.");
+        } finally {
+            setCancellingId(null);
         }
     };
 
@@ -127,10 +132,14 @@ const EventDetails = ({
                             {event.status === "active" &&
                             validateTime(event.date, event.time, 24) ? (
                                 <CustomButton
-                                    // text={"Cancelar"}
-                                    text={<i className="far fa-trash-alt"></i>}
+                                    text={
+                                        cancellingId === event.id
+                                            ? <i className="fas fa-spinner fa-spin"></i>
+                                            : <i className="far fa-trash-alt"></i>
+                                    }
                                     className={styles.cancelBtn}
                                     onClick={() => handleCancellBtn(event.id)}
+                                    disabled={cancellingId !== null}
                                 />
                             ) : null}
                         </div>

@@ -278,11 +278,9 @@ const AddEvent = ({
                 </div>
                 <div className={styles.addEventFooter}>
                     <CustomButton
-                        text={"Agendar"}
+                        text={isLoading ? "Agendando..." : "Agendar"}
                         className={styles.addEventBtn}
-                        disabled={
-                            !selectedService || !selectedTime ? true : false
-                        }
+                        disabled={isLoading || !selectedService || !selectedTime}
                     />
                 </div>
             </form>
