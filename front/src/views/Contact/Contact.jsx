@@ -6,103 +6,101 @@ import { toast } from "react-toastify";
 import axios from "axios";
 const url = import.meta.env.VITE_URL_BACK;
 const Contact = () => {
-    const navigate = useNavigate();
+  const navigate = useNavigate();
 
-    const [dataForm, setDataForm] = useState({
-        name: "",
-        email: "",
-        concern: "",
-    });
+  const [dataForm, setDataForm] = useState({
+    name: "",
+    email: "",
+    concern: "",
+  });
 
-    const [isLoading, setIsLoading] = useState(false);
+  const [isLoading, setIsLoading] = useState(false);
 
-    const handleInputChange = (e) => {
-        const { name, value } = e.target;
-        setDataForm({ ...dataForm, [name]: value });
-    };
+  const handleInputChange = (e) => {
+    const { name, value } = e.target;
+    setDataForm({ ...dataForm, [name]: value });
+  };
 
-    const handleOnSubmit = async (e) => {
-        e.preventDefault();
-        const { name, email, concern } = dataForm;
-        if (!name.trim() || !email.trim() || !concern.trim()) {
-            toast.warning("Debes completar todos los campos para continuar.");
+  const handleOnSubmit = async (e) => {
+    e.preventDefault();
+    const { name, email, concern } = dataForm;
+    if (!name.trim() || !email.trim() || !concern.trim()) {
+      toast.warning("Debes completar todos los campos para continuar.");
+    } else {
+      setIsLoading(true);
+      try {
+        const response = await axios.post(`${url}/mails`, dataForm);
+        if (response.status === 200) {
+          toast.success(`Tu consulta ha sido enviada con éxito.`);
+          setDataForm({
+            name: "",
+            email: "",
+            concern: "",
+          });
+          navigate("/");
         } else {
-            setIsLoading(true);
-            try {
-                const response = await axios.post(
-                    `${url}/mails`,
-                    dataForm
-                );
-                if (response.status === 200) {
-                    toast.success(`Tu consulta ha sido enviada con éxito.`);
-                    setDataForm({
-                        name: "",
-                        email: "",
-                        concern: "",
-                    });
-                    navigate("/");
-                } else {
-                    toast.error("Error en el login.");
-                }
-            } catch (error) {
-                toast.error("Error en el login.");
-            } finally {
-                setIsLoading(false);
-            }
+          toast.error("Error en el login.");
         }
-    };
-    return (
-        <section className={styles.contactContainer}>
-            <div className={styles.contactInfo}>
-                <img src="./AnaAdelinaText.png" alt="" />
-                <h2>Belleza y Spa</h2>
-            </div>
-            <div className={styles.formContainer}>
-                <p className={styles.eyebrow}>Contacto</p>
-                <h3 className={styles.formTitle}>¿Tenés alguna consulta?</h3>
-                <div className={styles.titleDivider}>
-                    <span className={styles.diamond}></span>
-                </div>
-                {isLoading && <div className={styles.loader}></div>}
-                <form
-                    action=""
-                    className={styles.contactForm}
-                    onSubmit={handleOnSubmit}
-                >
-                    <label htmlFor="name">
-                        Nombre
-                        <input
-                            type="text"
-                            name="name"
-                            id="name"
-                            onChange={handleInputChange}
-                        />
-                    </label>
-                    <label htmlFor="email">
-                        Email
-                        <input
-                            type="email"
-                            name="email"
-                            id="email"
-                            onChange={handleInputChange}
-                        />
-                    </label>
-                    <label htmlFor="concern">Consulta</label>
-                    <textarea
-                        name="concern"
-                        id="concern"
-                        cols="30"
-                        rows="10"
-                        onChange={handleInputChange}
-                    ></textarea>
-                    <button disabled={isLoading}>
-                        {isLoading ? "Enviando..." : "Enviar"}
-                    </button>
-                </form>
-            </div>
-            <Social variant="contact" />
-        </section>
-    );
+      } catch (error) {
+        toast.error("Error en el login.");
+      } finally {
+        setIsLoading(false);
+      }
+    }
+  };
+  return (
+    <section className={styles.contactContainer}>
+      <div className={styles.contactInfo}>
+        <img src="./AnaAdelinaText.png" alt="" />
+        <h2>Belleza y Spa</h2>
+      </div>
+      <div className={styles.formContainer}>
+        <p className={styles.eyebrow}>Contacto</p>
+        <h3 className={styles.formTitle}>¿Tenés alguna consulta?</h3>
+        <div className={styles.titleDivider}>
+          <span className={styles.diamond}></span>
+        </div>
+        {isLoading && <div className={styles.loader}></div>}
+        <form
+          action=""
+          className={styles.contactForm}
+          onSubmit={handleOnSubmit}
+        >
+          <label htmlFor="name">
+            Nombre
+            <input
+              type="text"
+              name="name"
+              id="name"
+              onChange={handleInputChange}
+            />
+          </label>
+          <label htmlFor="email">
+            Email
+            <input
+              type="email"
+              name="email"
+              id="email"
+              onChange={handleInputChange}
+            />
+          </label>
+          <label htmlFor="concern">Consulta</label>
+          <textarea
+            name="concern"
+            id="concern"
+            cols="30"
+            rows="6"
+            onChange={handleInputChange}
+            style={{ resize: "none" }}
+          ></textarea>
+          <button disabled={isLoading}>
+            {isLoading ? "Enviando..." : "Enviar"}
+          </button>
+        </form>
+      </div>
+      <Social variant="contact" />
+    </section>
+  );
 };
 
 export default Contact;
