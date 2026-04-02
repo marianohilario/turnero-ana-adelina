@@ -9,8 +9,8 @@ const nodemailer_1 = __importDefault(require("nodemailer"));
 const mailsRouter = (0, express_1.Router)();
 const transporter = nodemailer_1.default.createTransport({
     host: "smtp.gmail.com",
-    port: 465,
-    secure: true,
+    port: 587,
+    secure: false,
     auth: {
         user: envs_1.USER_MAIL,
         pass: envs_1.USER_MAIL_PASSWORD,
