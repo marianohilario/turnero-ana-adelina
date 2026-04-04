@@ -80,7 +80,7 @@ function confirmationEmailHtml(
                       <tr>
                         <td width="55%" style="padding-right:16px;border-right:1px solid rgba(226,92,127,0.18);vertical-align:top;">
                           <p style="margin:0 0 5px 0;font-family:Georgia,sans-serif;font-size:8px;letter-spacing:3px;text-transform:uppercase;color:#e25c7f;">Fecha</p>
-                          <p style="margin:0;font-family:Georgia,serif;font-size:19px;font-style:italic;color:#1a0a0f;">${day} de ${month} de ${year}</p>
+                          <p style="margin:0;font-family:Georgia,serif;font-size:19px;font-style:italic;color:#1a0a0f;">${day}/${month}/${year}</p>
                         </td>
                         <td width="45%" style="padding-left:20px;vertical-align:top;">
                           <p style="margin:0 0 5px 0;font-family:Georgia,sans-serif;font-size:8px;letter-spacing:3px;text-transform:uppercase;color:#e25c7f;">Hora</p>
@@ -192,7 +192,7 @@ function cancellationEmailHtml(
                       <tr>
                         <td width="55%" style="padding-right:16px;border-right:1px solid rgba(226,92,127,0.18);vertical-align:top;">
                           <p style="margin:0 0 5px 0;font-family:Georgia,sans-serif;font-size:8px;letter-spacing:3px;text-transform:uppercase;color:#e25c7f;">Fecha</p>
-                          <p style="margin:0;font-family:Georgia,serif;font-size:19px;font-style:italic;color:#1a0a0f;">${day} de ${month} de ${year}</p>
+                          <p style="margin:0;font-family:Georgia,serif;font-size:19px;font-style:italic;color:#1a0a0f;">${day}/${month}/${year}</p>
                         </td>
                         <td width="45%" style="padding-left:20px;vertical-align:top;">
                           <p style="margin:0 0 5px 0;font-family:Georgia,sans-serif;font-size:8px;letter-spacing:3px;text-transform:uppercase;color:#e25c7f;">Hora</p>
@@ -272,12 +272,21 @@ mailsRouter.post("/", (req: Request, res: Response) => {
 mailsRouter.post("/confirmappointment", (req: Request, res: Response) => {
   const { name, email, service, date, time } = req.body;
   const [year, month, day] = date.split("-");
+  const formatedDay = day.padStart(2, "0");
+  const formatedMonth = month.padStart(2, "0");
   const mailOptions = {
     from: `"Ana Adelina" <${USER_MAIL}>`,
     to: email,
     subject: `Confirmación de cita en Ana Adelina`,
     text: `Hola ${name}, tu cita para el servicio de ${service} el día ${day}/${month}/${year} a las ${time}hs ha sido confirmada. ¡Te estaremos esperando! Atentamente, Ana Adelina.`,
-    html: confirmationEmailHtml(name, service, day, month, year, time),
+    html: confirmationEmailHtml(
+      name,
+      service,
+      formatedDay,
+      formatedMonth,
+      year,
+      time,
+    ),
   };
   transporter.sendMail(mailOptions, (error, info) => {
     if (error) {

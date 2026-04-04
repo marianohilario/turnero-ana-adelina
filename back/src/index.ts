@@ -15,6 +15,7 @@ server.use(cors());
 server.use(express.static(path.join(__dirname, "public")));
 server.use("/uploads", express.static(path.join(__dirname, "uploads")));
 server.use(express.json());
+server.get("/health", (_req, res) => res.status(200).json({ status: "ok" }));
 server.use(indexRouter);
 
 server.use((err: AuxError, req: Request, res: Response, next: NextFunction) => {
