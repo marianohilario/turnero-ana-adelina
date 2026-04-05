@@ -1,18 +1,10 @@
 import { Request, Response, Router } from "express";
-import { USER_MAIL, USER_MAIL_PASSWORD } from "../config/envs";
-import nodemailer from "nodemailer";
+import { USER_MAIL, RESEND_API_KEY } from "../config/envs";
+import { Resend } from "resend";
 
 const mailsRouter: Router = Router();
 
-const transporter = nodemailer.createTransport({
-  host: "smtp.gmail.com",
-  port: 587,
-  secure: false,
-  auth: {
-    user: USER_MAIL,
-    pass: USER_MAIL_PASSWORD,
-  },
-});
+const resend = new Resend(RESEND_API_KEY);
 
 function confirmationEmailHtml(
   name: string,
@@ -253,65 +245,46 @@ function cancellationEmailHtml(
 </html>`;
 }
 
-mailsRouter.post("/", (req: Request, res: Response) => {
+mailsRouter.post("/", async (req: Request, res: Response) => {
   const { name, email, concern } = req.body;
-  const mailOptions = {
-    from: email,
-    to: USER_MAIL,
+  const { error } = await resend.emails.send({
+    from: "Ana Adelina <onboarding@resend.dev>",
+    to: USER_MAIL as string,
     subject: `Consulta de ${name}`,
     text: `Nombre: ${name}\nEmail: ${email}\nConsulta: ${concern}`,
-  };
-  transporter.sendMail(mailOptions, (error, info) => {
-    if (error) {
-      return res.status(500).json({ error: error.message });
-    }
-    res.status(200).json({ message: "Email enviado con éxito!" });
   });
+  if (error) return res.status(500).json({ error: error.message });
+  res.status(200).json({ message: "Email enviado con éxito!" });
 });
 
-mailsRouter.post("/confirmappointment", (req: Request, res: Response) => {
+mailsRouter.post("/confirmappointment", async (req: Request, res: Response) => {
   const { name, email, service, date, time } = req.body;
   const [year, month, day] = date.split("-");
   const formatedDay = day.padStart(2, "0");
   const formatedMonth = month.padStart(2, "0");
-  const mailOptions = {
-    from: `"Ana Adelina" <${USER_MAIL}>`,
+  const { error } = await resend.emails.send({
+    from: "Ana Adelina <onboarding@resend.dev>",
     to: email,
     subject: `Confirmación de cita en Ana Adelina`,
     text: `Hola ${name}, tu cita para el servicio de ${service} el día ${day}/${month}/${year} a las ${time}hs ha sido confirmada. ¡Te estaremos esperando! Atentamente, Ana Adelina.`,
-    html: confirmationEmailHtml(
-      name,
-      service,
-      formatedDay,
-      formatedMonth,
-      year,
-      time,
-    ),
-  };
-  transporter.sendMail(mailOptions, (error, info) => {
-    if (error) {
-      return res.status(500).json({ error: error.message });
-    }
-    res.status(200).json({ message: "Email enviado con éxito!" });
+    html: confirmationEmailHtml(name, service, formatedDay, formatedMonth, year, time),
   });
+  if (error) return res.status(500).json({ error: error.message });
+  res.status(200).json({ message: "Email enviado con éxito!" });
 });
 
-mailsRouter.post("/cancelappointment", (req: Request, res: Response) => {
+mailsRouter.post("/cancelappointment", async (req: Request, res: Response) => {
   const { name, email, service, date, time } = req.body;
   const [year, month, day] = date.split("-");
-  const mailOptions = {
-    from: `"Ana Adelina" <${USER_MAIL}>`,
+  const { error } = await resend.emails.send({
+    from: "Ana Adelina <onboarding@resend.dev>",
     to: email,
     subject: `Cancelación de cita en Ana Adelina`,
     text: `Hola ${name}, tu cita para el servicio de ${service} el día ${day}/${month}/${year} a las ${time}hs ha sido CANCELADA. Si no realizaste esta acción, por favor contáctanos. Atentamente, Ana Adelina.`,
     html: cancellationEmailHtml(name, service, day, month, year, time),
-  };
-  transporter.sendMail(mailOptions, (error, info) => {
-    if (error) {
-      return res.status(500).json({ error: error.message });
-    }
-    res.status(200).json({ message: "Email enviado con éxito!" });
   });
+  if (error) return res.status(500).json({ error: error.message });
+  res.status(200).json({ message: "Email enviado con éxito!" });
 });
 
 export default mailsRouter;
