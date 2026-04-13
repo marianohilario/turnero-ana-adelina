@@ -258,7 +258,8 @@ const Calendar = () => {
         {new Date(currentYear, currentMonth, selectedDay) >=
           new Date().setHours(0, 0, 0, 0) && (
           <div className={styles.addEvent} onClick={handleAddEventClick}>
-            <i className="fas fa-plus"></i>
+            {/* <i className="fas fa-plus"></i> */}
+            Agendar cita
           </div>
         )}
       </div>
