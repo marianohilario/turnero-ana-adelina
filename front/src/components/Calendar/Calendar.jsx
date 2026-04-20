@@ -69,11 +69,8 @@ const Calendar = () => {
       });
     }
 
-    console.log("userAppointments", userAppointments);
-
     // Current month days
     for (let i = 1; i <= lastDayDate; i++) {
-      // let event = false;
       const appointmentsThisMonth = userAppointments.filter((a) => {
         const [year, month] = a.date.split("-").map(Number);
         return year === currentYear && month === currentMonth + 1;
@@ -84,15 +81,7 @@ const Calendar = () => {
           return date === day && a.status === "active";
         });
       };
-      // userAppointments.forEach((element) => {
-      //   const [year, month, date] = element.date.split("-").map(Number);
-      //   if (date === i && month === currentMonth + 1 && year === currentYear) {
-      //     event = true;
-      //   }
-      // });
       const event = hasActiveEvent(i);
-
-      console.log(`Día ${i} tiene evento:`, event);
 
       const isToday =
         selectedDay === null
